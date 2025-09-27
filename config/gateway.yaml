@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: "${SPRING_APPLICATION_NAME:gateway}"
+
+  cloud:
+    gateway:
+      routes:
+        - id: usermanager
+          uri: lb://usermanager
+          predicates:
+            - Path=/usermanager/**
+        - id: image
+          uri: lb://image
+          predicates:
+            - Path=/image/**
+        - id: business
+          uri: lb://business
+          predicates:
+            - Path=/business/**
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: false
+            maxAge: 3600
+
+server:
+  port: "${SERVER_PORT:8060}"
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web.reactive: DEBUG

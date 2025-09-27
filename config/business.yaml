@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: "${SPRING_APPLICATION_NAME:business}"
+  datasource:
+    url: "jdbc:postgresql://postgres_business:5432/db_business"
+  kafka:
+    bootstrap-servers: kafka:29092
+    consumer:
+      group-id: businesszone-service
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        # Configuration pour la désérialisation JSON
+        spring.json.trusted.packages: "cm.fastrelay.usermanager.event.dto"
+        spring.json.type.mapping: "userCreatedEvent:cm.fastrelay.usermanager.event.dto.UserCreatedEvent"
+        # Optimisations consumer
+        auto.offset.reset: earliest
+        enable.auto.commit: true
+        auto.commit.interval.ms: 5000
+        session.timeout.ms: 30000
+        heartbeat.interval.ms: 3000

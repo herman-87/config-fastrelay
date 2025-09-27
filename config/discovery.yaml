@@ -1,0 +1,15 @@
+# Discovery service configuration is self-contained and does NOT import from Spring Cloud Config Server.
+# If you want discovery-server to use the Config Server, set the environment variable in docker-compose:
+#   SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8088
+# Currently, docker-compose does not set that for discovery-server, so these values are taken from the classpath here.
+spring:
+  application:
+    name: "${SPRING_APPLICATION_NAME:discovery}"
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
+server:
+  port: "${SERVER_PORT:8761}"

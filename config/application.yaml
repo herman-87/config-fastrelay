@@ -1,0 +1,73 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "${KEYCLOAK_ISSUER_URI:http://localhost:8080/realms/fastrelay}"
+          jwk-set-uri: "http://keycloak:8080/realms/fastrelay/protocol/openid-connect/certs"
+  datasource:
+    driver-class-name: "org.postgresql.Driver"
+    username: "postgres"
+    password: "admin"
+    hikari:
+      maximum-pool-size: 9
+  jpa:
+    hibernate:
+      ddl-auto: "validate"
+    properties:
+      hibernate:
+        dialect: "org.hibernate.dialect.PostgreSQLDialect"
+  liquibase:
+    change-log: "classpath:db/changelog/master.xml"
+    clear-check-sums: true
+    enabled: true
+
+# Common Eureka config
+eureka:
+  client:
+    service-url:
+      defaultZone: "http://discovery-server:8761/eureka/"
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+# Common security config
+security:
+  cors:
+    allowed-origins: "*"
+    allowed-methods: "GET,POST,PUT,DELETE,OPTIONS,PATCH"
+    allowed-headers: "*"
+    allow-credentials: false
+    max-age: 3600
+
+# Common logging/tracing
+management:
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0
+
+keycloak:
+  admin:
+    api:
+      base-url: "${KEYCLOAK_ADMIN_API_BASE_URL:http://keycloak:8080/admin/realms/fastrelay}"
+  token:
+    api:
+      base-url: "${KEYCLOAK_TOKEN_API_BASE_URL:http://keycloak:8080/realms/fastrelay}"
+  client:
+    id: "${KEYCLOAK_CLIENT_ID:fastrelaybackend}"
+    secret: "${KEYCLOAK_CLIENT_SECRET:3Rr7XKrA3TmkLHdytDFPeTWqLsW2KXTX}"
+  realm:
+    name: "${KEYCLOAK_REALM_NAME:fastrelay}"
+
+logging:
+  level:
+    root: INFO
+    cm.fastrelay.usermanager: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.web.client: DEBUG
+    org.springframework.http.client: DEBUG
+    org.springframework.security: DEBUG
