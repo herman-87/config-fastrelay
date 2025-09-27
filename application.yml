@@ -6,9 +6,10 @@ spring:
       server:
         git:
           uri: "https://github.com/herman-87/config-fastrelay.git"
-          default-label: "master"
+          default-label: "main"
           search-paths:
             - "config"
+          clone-on-start: true
   profiles:
     active: "git"
 
