@@ -10,8 +10,6 @@ spring:
           search-paths:
             - "config"
           clone-on-start: true
-  profiles:
-    active: "git"
 
 server:
   port: "${SERVER_PORT:8088}"
