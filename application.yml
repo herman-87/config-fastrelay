@@ -1,1 +1,16 @@
-xParam: 87
+spring:
+  application:
+    name: "config-server"
+  cloud:
+    config:
+      server:
+        git:
+          uri: "https://github.com/herman-87/config-fastrelay.git"
+          default-label: "master"
+          search-paths:
+            - "config"
+  profiles:
+    active: "git"
+
+server:
+  port: "${SERVER_PORT:8088}"
