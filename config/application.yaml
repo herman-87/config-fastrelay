@@ -59,9 +59,9 @@ keycloak:
       base-url: "${KEYCLOAK_TOKEN_API_BASE_URL:http://keycloak:8080/realms/fastrelay}"
   client:
     id: "${KEYCLOAK_CLIENT_ID:fastrelaybackend}"
-    secret: "${KEYCLOAK_CLIENT_SECRET:3Rr7XKrA3TmkLHdytDFPeTWqLsW2KXTX}"
+    secret: "${KEYCLOAK_CLIENT_SECRET:hRV8Li1AMtUg93XNeS34kRVbL5kUWaGB}"
   realm:
-    name: "${KEYCLOAK_REALM_NAME:fastrelay}"
+    name: "${KEYCLOAK_REALM_NAME:fast-relays}"
 
 logging:
   level:
