@@ -3,8 +3,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: "${KEYCLOAK_ISSUER_URI:http://localhost:8080/realms/fastrelay}"
-          jwk-set-uri: "http://keycloak:8080/realms/fastrelay/protocol/openid-connect/certs"
+          issuer-uri: "${KEYCLOAK_ISSUER_URI:http://localhost:8080/realms/fast-relays}"
+          jwk-set-uri: "http://keycloak:8080/realms/fast-relays/protocol/openid-connect/certs"
   datasource:
     driver-class-name: "org.postgresql.Driver"
     username: "postgres"
@@ -53,10 +53,10 @@ management:
 keycloak:
   admin:
     api:
-      base-url: "${KEYCLOAK_ADMIN_API_BASE_URL:http://keycloak:8080/admin/realms/fastrelay}"
+      base-url: "${KEYCLOAK_ADMIN_API_BASE_URL:http://keycloak:8080/admin/realms/fast-relays}"
   token:
     api:
-      base-url: "${KEYCLOAK_TOKEN_API_BASE_URL:http://keycloak:8080/realms/fastrelay}"
+      base-url: "${KEYCLOAK_TOKEN_API_BASE_URL:http://keycloak:8080/realms/fast-relays}"
   client:
     id: "${KEYCLOAK_CLIENT_ID:fastrelaybackend}"
     secret: "${KEYCLOAK_CLIENT_SECRET:hRV8Li1AMtUg93XNeS34kRVbL5kUWaGB}"
