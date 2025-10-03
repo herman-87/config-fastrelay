@@ -15,6 +15,6 @@ app:
 
 minio:
   endpoint: "${MINIO_ENDPOINT:http://minio:9000}"
-  root-user: "${MINIO_ROOT_USER:minioadmin}"
-  root-password: "${MINIO_ROOT_PASSWORD:minioadmin}"
+  access-key: "${MINIO_ACCESS_KEY:minioadmin}"
+  secret-key: "${MINIO_SECRET_KEY:minioadmin}"
   default-bucket-name: images
