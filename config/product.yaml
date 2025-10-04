@@ -2,4 +2,4 @@ spring:
   application:
     name: "${SPRING_APPLICATION_NAME:product}"
   datasource:
-    url: "jdbc:postgresql://postgres_product:5432/db_product"
+    url: "${DB_URL}"

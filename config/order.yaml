@@ -2,4 +2,4 @@ spring:
   application:
     name: "${SPRING_APPLICATION_NAME:order}"
   datasource:
-    url: "jdbc:postgresql://postgres_order:5432/db_order"
+    url: "${DB_URL}"

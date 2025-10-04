@@ -7,14 +7,14 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
   datasource:
-    url: "jdbc:postgresql://postgres_image:5432/db_image"
+    url: "${DB_URL}"
 
 app:
   upload:
     max-file-size: 5242880
 
 minio:
-  endpoint: "${MINIO_ENDPOINT:http://minio:9000}"
-  access-key: "${MINIO_ACCESS_KEY:minioadmin}"
-  secret-key: "${MINIO_SECRET_KEY:minioadmin}"
+  endpoint: "${MINIO_ENDPOINT}"
+  access-key: "${MINIO_ACCESS_KEY}"
+  secret-key: "${MINIO_SECRET_KEY}"
   default-bucket-name: images
