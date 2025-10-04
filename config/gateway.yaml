@@ -17,6 +17,10 @@ spring:
           uri: lb://business
           predicates:
             - Path=/business/**
+        - id: product
+          uri: lb://product
+          predicates:
+            - Path=/product/**
       discovery:
         locator:
           enabled: true
