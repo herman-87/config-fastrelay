@@ -9,6 +9,9 @@ spring:
   datasource:
     url: "${DB_URL}"
 
+server:
+  port: "${SERVER_PORT}"
+
 app:
   upload:
     max-file-size: 5242880
