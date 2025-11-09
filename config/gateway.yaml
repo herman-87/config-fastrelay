@@ -10,18 +10,26 @@ spring:
             uri: lb://usermanager
             predicates:
               - Path=/usermanager/**
+            filters:
+              - StripPrefix=1   # 👈 enlève "/usermanager" avant de transférer
           - id: image
             uri: lb://image
             predicates:
               - Path=/image/**
+            filters:
+              - StripPrefix=1
           - id: business
             uri: lb://business
             predicates:
               - Path=/business/**
+            filters:
+              - StripPrefix=1
           - id: product
             uri: lb://product
             predicates:
               - Path=/product/**
+            filters:
+              - StripPrefix=1
       discovery:
         locator:
           enabled: true
