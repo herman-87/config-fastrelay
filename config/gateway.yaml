@@ -6,43 +6,51 @@ spring:
     gateway:
       globalcors:
         add-to-simple-url-handler-mapping: true
-        corsConfigurations:
+        cors-configurations:
           '[/**]':
-            allowedOrigins: "*"
-            allowedMethods:
+            allowed-origins: "*"
+            allowed-methods:
               - GET
               - POST
               - PUT
               - DELETE
               - OPTIONS
-            allowedHeaders:
-              - "*"
-            allowCredentials: false
-      routes:
-        - id: usermanager
-          predicates:
-            - Path=/usermanager/**
-          uri: lb://usermanager
-
-        - id: image
-          uri: lb://image
-          predicates:
-            - Path=/image/**
-
-        - id: business
-          uri: lb://business
-          predicates:
-            - Path=/business/**
-
-        - id: product
-          uri: lb://product
-          predicates:
-            - Path=/product/**
+            allowed-headers: "*"
+            allow-credentials: false
 
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
+
+      routes:
+        - id: usermanager
+          uri: lb://usermanager
+          predicates:
+            - Path=/usermanager/**
+          filters:
+            - RewritePath=/usermanager/(?<segment>.*), /${segment}
+
+        - id: image
+          uri: lb://image
+          predicates:
+            - Path=/image/**
+          filters:
+            - RewritePath=/image/(?<segment>.*), /${segment}
+
+        - id: business
+          uri: lb://business
+          predicates:
+            - Path=/business/**
+          filters:
+            - RewritePath=/business/(?<segment>.*), /${segment}
+
+        - id: product
+          uri: lb://product
+          predicates:
+            - Path=/product/**
+          filters:
+            - RewritePath=/product/(?<segment>.*), /${segment}
 
 server:
   port: "${SERVER_PORT:8060}"
@@ -51,3 +59,5 @@ logging:
   level:
     org.springframework.cloud.gateway: DEBUG
     org.springframework.web: DEBUG
+    reactor.netty: DEBUG
+    org.springframework.cloud.gateway.handler.RoutePredicateHandlerMapping: TRACE
