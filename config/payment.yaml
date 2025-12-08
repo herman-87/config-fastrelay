@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: "${SPRING_APPLICATION_NAME:payment}"
+  datasource:
+    url: "${DB_URL}"
+
+payment:
+  remote:
+    git:
+      repository-url: "${GIT_REPOSITORY_URL}"
+      repository-username: "${GIT_REPOSITORY_USERNAME}"
+      token: "${GIT_TOKEN}"
+  scheduler:
+    enabled: "${SCHEDULER_ENABLED:true}"
+    fixedRate: "${SCHEDULER_FIXED_RATE:60000}"
+  batch:
+    cron: "0 0 0 * * *"
+    chunkSize: "10"
+  external:
+    service:
+      monetbil:
+        url: "${MONETBIL_SERVICE_URL}"
+        key: "${MONETBIL_KEY_URL}"
