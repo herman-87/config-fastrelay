@@ -52,6 +52,13 @@ spring:
           filters:
             - RewritePath=/product/(?<segment>.*), /${segment}
 
+        - id: payment
+          uri: lb://payment
+          predicates:
+            - Path=/payment/**
+          filters:
+            - RewritePath=/payment/(?<segment>.*), /${segment}
+
 server:
   port: "${SERVER_PORT:8060}"
 
