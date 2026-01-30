@@ -62,6 +62,13 @@ spring:
           filters:
             - RewritePath=/payment/(?<segment>.*), /${segment}
 
+        - id: likes
+          uri: lb://likes
+          predicates:
+            - Path=/likes/**
+          filters:
+            - RewritePath=/likes/(?<segment>.*), /${segment}
+
 server:
   port: "${SERVER_PORT:8060}"
 
