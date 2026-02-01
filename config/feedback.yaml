@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: "${SPRING_APPLICATION_NAME:feedback}"
+  datasource:
+    url: "${DB_URL}"
