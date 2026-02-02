@@ -69,6 +69,13 @@ spring:
           filters:
             - RewritePath=/likes/(?<segment>.*), /${segment}
 
+        - id: feedback
+          uri: lb://feedback
+          predicates:
+            - Path=/feedback/**
+          filters:
+            - RewritePath=/feedback/(?<segment>.*), /${segment}
+
 server:
   port: "${SERVER_PORT:8060}"
 
