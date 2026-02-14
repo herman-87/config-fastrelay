@@ -3,3 +3,8 @@ spring:
     name: "${SPRING_APPLICATION_NAME:product}"
   datasource:
     url: "${DB_URL}"
+
+application:
+  promotion:
+    batch:
+      cron: "0 */5 * * * *"
