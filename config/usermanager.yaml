@@ -15,3 +15,6 @@ spring:
         batch.size: 16384
         linger.ms: 1
         buffer.memory: 33554432
+    topic:
+      product-created: product-created
+      promotion-created: promotion-created
