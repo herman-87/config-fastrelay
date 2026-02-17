@@ -19,3 +19,5 @@ spring:
         auto.commit.interval.ms: 5000
         session.timeout.ms: 30000
         heartbeat.interval.ms: 3000
+    topic:
+      business-created: "business-created"
