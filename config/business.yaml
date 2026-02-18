@@ -10,14 +10,8 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
-        # Configuration pour la désérialisation JSON
-        spring.json.trusted.packages: "cm.fastrelay.usermanager.event.dto"
-        spring.json.type.mapping: "userCreatedEvent:cm.fastrelay.usermanager.event.dto.UserCreatedEvent"
-        # Optimisations consumer
         auto.offset.reset: earliest
-        enable.auto.commit: true
-        auto.commit.interval.ms: 5000
-        session.timeout.ms: 30000
-        heartbeat.interval.ms: 3000
+        enable.auto.commit: false
+        isolation.level: read_committed
     topic:
       business-created: "business-created"
