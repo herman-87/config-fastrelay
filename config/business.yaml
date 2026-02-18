@@ -4,14 +4,17 @@ spring:
   datasource:
     url: "${DB_URL}"
   kafka:
-    bootstrap-servers: kafka:29092
+    bootstrap-servers: "kafka:29092"
     consumer:
-      group-id: businesszone-service
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      group-id: "businesszone-service"
+      auto-offset-reset: "earliest"
+      enable-auto-commit: false
+      isolation-level: "read_committed"
+      key-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
+      value-deserializer: "org.springframework.kafka.support.serializer.JsonDeserializer"
       properties:
-        auto.offset.reset: earliest
-        enable.auto.commit: false
-        isolation.level: read_committed
+        spring.json.value.default.type: "cm.fastrelay.businesszone.event.UserCreatedEvent"
+        spring.json.trusted.packages: "cm.fastrelay.usermanager.events.producer.model"
+
     topic:
       business-created: "business-created"
