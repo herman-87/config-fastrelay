@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: "${SPRING_APPLICATION_NAME:stats}"
+  datasource:
+    url: "${DB_URL}"
+  kafka:
+    bootstrap-servers: "kafka:29092"
+    consumer:
+      group-id: "stats-service"
+      auto-offset-reset: "earliest"
+      enable-auto-commit: false
+      isolation-level: "read_committed"

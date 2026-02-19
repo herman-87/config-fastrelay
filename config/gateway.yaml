@@ -83,6 +83,13 @@ spring:
           filters:
             - RewritePath=/feedback/(?<segment>.*), /${segment}
 
+        - id: stats
+          uri: lb://stats
+          predicates:
+            - Path=/stats/**
+          filters:
+            - RewritePath=/stats/(?<segment>.*), /${segment}
+
 server:
   port: "${SERVER_PORT:8060}"
 
