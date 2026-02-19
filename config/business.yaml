@@ -13,8 +13,8 @@ spring:
       key-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
       value-deserializer: "org.springframework.kafka.support.serializer.JsonDeserializer"
       properties:
-        spring.json.value.default.type: "cm.fastrelay.businesszone.event.UserCreatedEvent"
-        spring.json.trusted.packages: "cm.fastrelay.usermanager.events.producer.model"
+        spring.json.value.default.type: "cm.fastrelay.business.events.consumer.model.UserCreatedEvent"
+        spring.json.trusted.packages: "cm.fastrelay.business.events.consumer.model"
 
     topic:
       business-created: "business-created"
