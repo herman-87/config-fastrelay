@@ -9,7 +9,6 @@ spring:
       key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
       value-serializer: "org.springframework.kafka.support.serializer.JsonSerializer"
       properties:
-        # for production
         acks: "all"
         retries: "3"
         batch.size: "16384"
@@ -18,3 +17,7 @@ spring:
     topic:
       subscription-created: "subscription-created"
       subscription-expired: "subscription-expired"
+
+subscription:
+  expiration:
+    cron: "0 0 0 * * *"
