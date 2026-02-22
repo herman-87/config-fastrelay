@@ -3,3 +3,18 @@ spring:
     name: "${SPRING_APPLICATION_NAME:subscription}"
   datasource:
     url: "${DB_URL}"
+  kafka:
+    bootstrap-servers: "kafka:29092"
+    producer:
+      key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
+      value-serializer: "org.springframework.kafka.support.serializer.JsonSerializer"
+      properties:
+        # for production
+        acks: "all"
+        retries: "3"
+        batch.size: "16384"
+        linger.ms: "1"
+        buffer.memory: "33554432"
+    topic:
+      subscription-created: "subscription-created"
+      subscription-expired: "subscription-expired"
