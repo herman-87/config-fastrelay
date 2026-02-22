@@ -13,3 +13,5 @@ spring:
 
     topic:
       business-created: "business-created"
+      subscription-created: "subscription-created"
+      subscription-expired: "subscription-expired"
