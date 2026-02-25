@@ -5,15 +5,10 @@ spring:
     url: "${DB_URL}"
   kafka:
     bootstrap-servers: "kafka:29092"
-    producer:
-      key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
-      value-serializer: "org.springframework.kafka.support.serializer.JsonSerializer"
-      properties:
-        # for production
-        acks: "all"
-        retries: "3"
-        batch.size: "16384"
-        linger.ms: "1"
-        buffer.memory: "33554432"
+    consumer:
+      group-id: "order-service"
+      auto-offset-reset: "earliest"
+      enable-auto-commit: false
+      isolation-level: "read_committed"
     topic:
       user-created: "user-created"
