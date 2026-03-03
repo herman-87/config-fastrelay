@@ -1,6 +1,6 @@
 spring:
   application:
-    name: "${SPRING_APPLICATION_NAME:order}"
+    name: "${SPRING_APPLICATION_NAME:order-service}"
   datasource:
     url: "${DB_URL}"
   kafka:
