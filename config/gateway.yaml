@@ -69,12 +69,12 @@ spring:
           filters:
             - RewritePath=/likes/(?<segment>.*), /${segment}
 
-        - id: order-service
-          uri: lb://order-service
+        - id: order
+          uri: lb://order
           predicates:
-            - Path=/order-service/**
+            - Path=/order/**
           filters:
-            - RewritePath=/order-service/(?<segment>.*), /${segment}
+            - RewritePath=/order/(?<segment>.*), /${segment}
 
         - id: feedback
           uri: lb://feedback
