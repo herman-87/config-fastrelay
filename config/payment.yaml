@@ -31,5 +31,5 @@ payment:
   external:
     service:
       monetbil:
-        url: "${MONETBIL_SERVICE_URL}"
-        key: "${MONETBIL_KEY_URL}"
+        url: "${PAYMENT_EXTERNAL_SERVICE_MONETBIL_URL:https://api.monetbil.com}"
+        key: "${PAYMENT_EXTERNAL_SERVICE_MONETBIL_KEY}"
