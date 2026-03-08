@@ -1,5 +1,8 @@
 spring:
   application:
+    batch:
+      jdbc:
+        initialize-schema: "${SPRING_BATCH_JDBC_INITIALIZE_SCHEMA:always}"
     name: "${SPRING_APPLICATION_NAME:payment}"
   datasource:
     url: "${DB_URL}"
