@@ -8,6 +8,9 @@ spring:
     url: "${DB_URL}"
   kafka:
     bootstrap-servers: "${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}"
+    producer:
+      key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
+      value-serializer: "org.springframework.kafka.support.serializer.JsonSerializer"
     consumer:
       group-id: "${KAFKA_GROUP_ID:payment-service}"
     topic:
@@ -31,8 +34,14 @@ payment:
     enabled: "${PAYMENT_KAFKA_ENABLED:true}"
   monetbil:
     enabled: "${PAYMENT_MONETBIL_ENABLED:true}"
+  pawapay:
+    enabled: "${PAYMENT_PAWAPAY_ENABLED:true}"
+    bearer-token: "${PAYMENT_PAWAPAY_BEARER_TOKEN:}"
   external:
     service:
       monetbil:
         url: "${PAYMENT_EXTERNAL_SERVICE_MONETBIL_URL:https://api.monetbil.com}"
         key: "${PAYMENT_EXTERNAL_SERVICE_MONETBIL_KEY}"
+      pawapay:
+        url: "${PAYMENT_EXTERNAL_SERVICE_PAWAPAY_URL}"
+        token: "${PAYMENT_EXTERNAL_SERVICE_PAWAPAY_TOKEN}"

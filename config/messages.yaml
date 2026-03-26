@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: "${SPRING_APPLICATION_NAME:messages}"
+  datasource:
+    url: "${DB_URL}"
+  kafka:
+    bootstrap-servers: "kafka:29092"
+    consumer:
+      group-id: "messages-service"
+      auto-offset-reset: "earliest"
+      enable-auto-commit: false
+      isolation-level: "read_committed"
+    topic:
+      business-created: "business-created"
+      order-request-created: "order-request-created"
