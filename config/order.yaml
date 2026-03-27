@@ -12,3 +12,4 @@ spring:
       isolation-level: "read_committed"
     topic:
       user-created: "user-created"
+      order-request-created: "order-request-created"
