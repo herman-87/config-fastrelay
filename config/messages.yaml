@@ -12,4 +12,5 @@ spring:
       isolation-level: "read_committed"
     topic:
       business-created: "business-created"
+      conversation-created: "conversation-created"
       order-request-created: "order-request-created"
