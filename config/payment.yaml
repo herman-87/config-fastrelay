@@ -25,7 +25,7 @@ app:
       monetbil:
         enabled: "${PAYMENT_EXTERNAL_SERVICE_MONETBIL_ENABLED:true}"
         url: "${PAYMENT_EXTERNAL_SERVICE_MONETBIL_URL:https://api.monetbil.com}"
-        key: "${PAYMENT_EXTERNAL_SERVICE_MONETBIL_KEY}"
+        service-key: "${PAYMENT_EXTERNAL_SERVICE_MONETBIL_KEY}"
       pawapay:
         enabled: "${PAYMENT_EXTERNAL_SERVICE_PAWAPAY_ENABLED:true}"
         bearer-token: "${PAYMENT_PAWAPAY_BEARER_TOKEN:}"
