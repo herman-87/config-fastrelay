@@ -1,4 +1,6 @@
 spring:
+  jackson:
+    default-property-inclusion: "NON_ABSENT"
   security:
     oauth2:
       resourceserver:

@@ -17,31 +17,17 @@ spring:
       user-created: "${KAFKA_TOPIC_USER_CREATED:user-created}"
       transfer-request-created: "${KAFKA_TOPIC_TRANSFER_CREATED:transfer-request-created}"
 
-payment:
-  remote:
-    git:
-      repository-url: "${GIT_REPOSITORY_URL}"
-      repository-username: "${GIT_REPOSITORY_USERNAME}"
-      token: "${GIT_TOKEN}"
-  scheduler:
-    enabled: "${SCHEDULER_ENABLED:true}"
-    fixedRate: "${SCHEDULER_FIXED_RATE:60000}"
-  batch:
-    enabled: "${PAYMENT_BATCH_ENABLED:true}"
-    cron: "0 0 0 * * *"
-    chunkSize: "10"
-  kafka:
-    enabled: "${PAYMENT_KAFKA_ENABLED:true}"
-  monetbil:
-    enabled: "${PAYMENT_MONETBIL_ENABLED:true}"
-  pawapay:
-    enabled: "${PAYMENT_PAWAPAY_ENABLED:true}"
-    bearer-token: "${PAYMENT_PAWAPAY_BEARER_TOKEN:}"
+app:
+  webhook:
+    base-url: "${APP_WEBHOOK_BASE_URL:https://fastrelays/payment/alert}"
   external:
     service:
       monetbil:
+        enabled: "${PAYMENT_EXTERNAL_SERVICE_MONETBIL_ENABLED:true}"
         url: "${PAYMENT_EXTERNAL_SERVICE_MONETBIL_URL:https://api.monetbil.com}"
         key: "${PAYMENT_EXTERNAL_SERVICE_MONETBIL_KEY}"
       pawapay:
+        enabled: "${PAYMENT_EXTERNAL_SERVICE_PAWAPAY_ENABLED:true}"
+        bearer-token: "${PAYMENT_PAWAPAY_BEARER_TOKEN:}"
         url: "${PAYMENT_EXTERNAL_SERVICE_PAWAPAY_URL}"
         token: "${PAYMENT_EXTERNAL_SERVICE_PAWAPAY_TOKEN}"
