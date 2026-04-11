@@ -1,9 +1,9 @@
 spring:
   application:
-    batch:
-      jdbc:
-        initialize-schema: "${SPRING_BATCH_JDBC_INITIALIZE_SCHEMA:always}"
     name: "${SPRING_APPLICATION_NAME:payment}"
+  batch:
+    jdbc:
+      initialize-schema: "${SPRING_BATCH_JDBC_INITIALIZE_SCHEMA:always}"
   datasource:
     url: "${DB_URL}"
   kafka:
@@ -17,8 +17,10 @@ spring:
       transfer-request-created: "${KAFKA_TOPIC_TRANSFER_CREATED:transfer-request-created}"
 
 app:
+  account:
+    platform-number: "${APP_PLATFORM_ACCOUNT_NUMBER:671952927}"
   webhook:
-    base-url: "${APP_WEBHOOK_BASE_URL:https://fastrelays/payment/alert}"
+    base-url: "${APP_WEBHOOK_BASE_URL:https://fastrelays/payment/monetbil/notification}"
   external:
     service:
       monetbil:
