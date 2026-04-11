@@ -1,4 +1,6 @@
 spring:
+  kafka:
+    bootstrap-servers: "kafka:29092"
   jackson:
     default-property-inclusion: "NON_ABSENT"
   security:

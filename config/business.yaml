@@ -4,7 +4,6 @@ spring:
   datasource:
     url: "${DB_URL}"
   kafka:
-    bootstrap-servers: "kafka:29092"
     consumer:
       group-id: "businesszone-service"
       auto-offset-reset: "earliest"

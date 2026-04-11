@@ -4,7 +4,6 @@ spring:
   datasource:
     url: "${DB_URL}"
   kafka:
-    bootstrap-servers: "kafka:29092"
     consumer:
       group-id: "order-service"
       auto-offset-reset: "earliest"
@@ -13,3 +12,4 @@ spring:
     topic:
       user-created: "user-created"
       order-request-created: "order-request-created"
+      transfer-request-created: "transfer-request-created"
