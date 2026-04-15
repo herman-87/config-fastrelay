@@ -4,8 +4,17 @@ spring:
   datasource:
     url: "${DB_URL}"
   kafka:
+    bootstrap-servers: kafka:29092
     consumer:
       group-id: "stats-service"
-      auto-offset-reset: "earliest"
-      enable-auto-commit: false
-      isolation-level: "read_committed"
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        auto-offset-reset: "earliest"
+        enable-auto-commit: false
+        isolation-level: "read_committed"
+    topic:
+      article-created: "article-created"
+      promotion-created: "promotion-created"
+      business-created: "business-created"

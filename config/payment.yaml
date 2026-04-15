@@ -20,13 +20,14 @@ app:
   account:
     platform-number: "${APP_PLATFORM_ACCOUNT_NUMBER:671952927}"
   webhook:
-    base-url: "${APP_WEBHOOK_BASE_URL:https://fastrelays/payment/monetbil/notification}"
+    base-url: "${APP_WEBHOOK_BASE_URL:https://fastrelays/payment/monetbil/notify}"
   external:
     service:
       monetbil:
         enabled: "${PAYMENT_EXTERNAL_SERVICE_MONETBIL_ENABLED:true}"
         url: "${PAYMENT_EXTERNAL_SERVICE_MONETBIL_URL:https://api.monetbil.com}"
         service-key: "${PAYMENT_EXTERNAL_SERVICE_MONETBIL_KEY}"
+        service-secret: "${PAYMENT_EXTERNAL_SERVICE_MONETBIL_SECRET}"
       pawapay:
         enabled: "${PAYMENT_EXTERNAL_SERVICE_PAWAPAY_ENABLED:true}"
         bearer-token: "${PAYMENT_PAWAPAY_BEARER_TOKEN:}"
