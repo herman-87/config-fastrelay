@@ -74,7 +74,7 @@ keycloak:
 logging:
   level:
     root: INFO
-    cm.fastrelays.usermanager: DEBUG
+    cm.fastrelays.user: DEBUG
     org.springframework.web: DEBUG
     org.springframework.web.client: DEBUG
     org.springframework.http.client: DEBUG

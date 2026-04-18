@@ -1,8 +1,9 @@
 spring:
   application:
-    name: "${SPRING_APPLICATION_NAME:usermanager}"
+    name: "${SPRING_APPLICATION_NAME:user}"
   datasource:
     url: "${DB_URL}"
+    driver-class-name: "${DB_DRIVER_CLASS_NAME:org.postgresql.Driver}"
   kafka:
     bootstrap-servers: kafka:29092
     producer:
@@ -16,3 +17,6 @@ spring:
         buffer.memory: "33554432"
     topic:
       user-created: "user-created"
+
+server:
+  port: "${SERVER_PORT:8083}"

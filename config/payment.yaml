@@ -7,6 +7,7 @@ spring:
   datasource:
     url: "${DB_URL}"
   kafka:
+    bootstrap-servers: kafka:29092
     producer:
       key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
       value-serializer: "org.springframework.kafka.support.serializer.JsonSerializer"
@@ -14,6 +15,7 @@ spring:
       group-id: "${KAFKA_GROUP_ID:payment-service}"
     topic:
       user-created: "${KAFKA_TOPIC_USER_CREATED:user-created}"
+      business-created: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}"
       transfer-request-created: "${KAFKA_TOPIC_TRANSFER_CREATED:transfer-request-created}"
 
 app:

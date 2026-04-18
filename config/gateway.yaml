@@ -27,12 +27,12 @@ spring:
           lower-case-service-id: true
 
       routes:
-        - id: usermanager
-          uri: lb://usermanager
+        - id: user
+          uri: lb://user
           predicates:
-            - Path=/usermanager/**
+            - Path=/user/**
           filters:
-            - RewritePath=/usermanager/(?<segment>.*), /${segment}
+            - RewritePath=/user/(?<segment>.*), /${segment}
 
         - id: image
           uri: lb://image
