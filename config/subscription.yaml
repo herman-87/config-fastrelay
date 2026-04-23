@@ -11,6 +11,8 @@ spring:
       properties:
         acks: "all"
         retries: "3"
+        spring.json.trusted.packages: "*"
+        spring.json.add.type.headers: false
     topic:
       subscription-created: "subscription-created"
       subscription-expired: "subscription-expired"
