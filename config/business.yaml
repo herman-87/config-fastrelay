@@ -5,17 +5,12 @@ spring:
     url: "${DB_URL}"
   kafka:
     bootstrap-servers: kafka:29092
-    consumer:
-      group-id: "businesszone-service"
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-        spring.json.trusted.packages: "*"
-        auto-offset-reset: "earliest"
-        enable-auto-commit: false
-        isolation-level: "read_committed"
     topic:
       user-created: "user-created"
       subscription-created: "subscription-created"
       subscription-expired: "subscription-expired"
       business-created: "business-created"
+    consumer-groups:
+      user-created-group-id: "business-user-created"
+      subscription-created-group-id: "business-subscription-created"
+      subscription-expired-group-id: "business-subscription-expired"
