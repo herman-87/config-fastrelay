@@ -11,6 +11,12 @@ spring:
     producer:
       key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
       value-serializer: "org.springframework.kafka.support.serializer.JsonSerializer"
+      properties:
+        acks: "all"
+        retries: "3"
+        batch.size: "16384"
+        linger.ms: "1"
+        buffer.memory: "33554432"
     consumer:
       group-id: "${KAFKA_GROUP_ID:payment-service}"
     topic:
