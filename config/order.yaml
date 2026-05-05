@@ -3,14 +3,31 @@ spring:
     name: "${SPRING_APPLICATION_NAME:order}"
   datasource:
     url: "${DB_URL}"
-  kafka:
-    bootstrap-servers: kafka:29092
-    producer:
-      key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
-      value-serializer: "org.springframework.kafka.support.serializer.JsonSerializer"
-    consumer:
-      group-id: "order-service"
-    topic:
-      user-created: "user-created"
-      order-request-created: "order-request-created"
-      transfer-request-created: "transfer-request-created"
+  cloud:
+    function:
+      definition: userCreatedConsumer;transferRequestCreatedConsumer
+    stream:
+      bindings:
+        userCreatedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_USER_CREATED:user-created}"
+          group: "${KAFKA_GROUP_ID:order-service}"
+          content-type: "application/json"
+        transferRequestCreatedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_TRANSFER_CREATED:transfer-request-created}"
+          group: "${KAFKA_GROUP_ID:order-service}"
+          content-type: "application/json"
+        orderRequestCreated-out-0:
+          destination: "${KAFKA_TOPIC_ORDER_REQUEST_CREATED:order-request-created}"
+          content-type: "application/json"
+      kafka:
+        bindings:
+          userCreatedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_USER_CREATED:user-created}.dlq"
+          transferRequestCreatedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_TRANSFER_CREATED:transfer-request-created}.dlq"

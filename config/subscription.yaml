@@ -3,19 +3,15 @@ spring:
     name: "${SPRING_APPLICATION_NAME:subscription}"
   datasource:
     url: "${DB_URL}"
-  kafka:
-    bootstrap-servers: kafka:29092
-    producer:
-      key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
-      value-serializer: "org.springframework.kafka.support.serializer.JsonSerializer"
-      properties:
-        acks: "all"
-        retries: "3"
-        spring.json.trusted.packages: "*"
-        spring.json.add.type.headers: false
-    topic:
-      subscription-created: "subscription-created"
-      subscription-expired: "subscription-expired"
+  cloud:
+    stream:
+      bindings:
+        subscriptionCreated-out-0:
+          destination: "${KAFKA_TOPIC_SUBSCRIPTION_CREATED:subscription-created}"
+          content-type: "application/json"
+        subscriptionExpired-out-0:
+          destination: "${KAFKA_TOPIC_SUBSCRIPTION_EXPIRED:subscription-expired}"
+          content-type: "application/json"
 
 subscription:
   expiration:

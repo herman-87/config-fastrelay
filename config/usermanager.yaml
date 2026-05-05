@@ -4,19 +4,12 @@ spring:
   datasource:
     url: "${DB_URL}"
     driver-class-name: "${DB_DRIVER_CLASS_NAME:org.postgresql.Driver}"
-  kafka:
-    bootstrap-servers: kafka:29092
-    producer:
-      key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
-      value-serializer: "org.springframework.kafka.support.serializer.JsonSerializer"
-      properties:
-        acks: "all"
-        retries: "3"
-        batch.size: "16384"
-        linger.ms: "1"
-        buffer.memory: "33554432"
-    topic:
-      user-created: "user-created"
+  cloud:
+    stream:
+      bindings:
+        userCreated-out-0:
+          destination: "${KAFKA_TOPIC_USER_CREATED:user-created}"
+          content-type: "application/json"
 
 server:
   port: "${SERVER_PORT:8083}"

@@ -6,23 +6,34 @@ spring:
       initialize-schema: "${SPRING_BATCH_JDBC_INITIALIZE_SCHEMA:always}"
   datasource:
     url: "${DB_URL}"
-  kafka:
-    bootstrap-servers: kafka:29092
-    producer:
-      key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
-      value-serializer: "org.springframework.kafka.support.serializer.JsonSerializer"
-      properties:
-        acks: "all"
-        retries: "3"
-        batch.size: "16384"
-        linger.ms: "1"
-        buffer.memory: "33554432"
-    consumer:
-      group-id: "${KAFKA_GROUP_ID:payment-service}"
-    topic:
-      user-created: "${KAFKA_TOPIC_USER_CREATED:user-created}"
-      business-created: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}"
-      transfer-request-created: "${KAFKA_TOPIC_TRANSFER_CREATED:transfer-request-created}"
+  cloud:
+    function:
+      definition: userCreatedConsumer;businessCreatedConsumer
+    stream:
+      bindings:
+        userCreatedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_USER_CREATED:user-created}"
+          group: "${KAFKA_GROUP_ID:payment-service}"
+          content-type: "application/json"
+        businessCreatedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}"
+          group: "${KAFKA_GROUP_ID:payment-service}"
+          content-type: "application/json"
+        transferCreated-out-0:
+          destination: "${KAFKA_TOPIC_TRANSFER_CREATED:transfer-request-created}"
+          content-type: "application/json"
+      kafka:
+        bindings:
+          userCreatedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_USER_CREATED:user-created}.dlq"
+          businessCreatedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}.dlq"
 
 app:
   account:

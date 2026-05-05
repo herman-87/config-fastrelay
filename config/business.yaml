@@ -3,14 +3,40 @@ spring:
     name: "${SPRING_APPLICATION_NAME:business}"
   datasource:
     url: "${DB_URL}"
-  kafka:
-    bootstrap-servers: kafka:29092
-    topic:
-      user-created: "user-created"
-      subscription-created: "subscription-created"
-      subscription-expired: "subscription-expired"
-      business-created: "business-created"
-    consumer-groups:
-      user-created-group-id: "business-user-created"
-      subscription-created-group-id: "business-subscription-created"
-      subscription-expired-group-id: "business-subscription-expired"
+  cloud:
+    function:
+      definition: userCreatedConsumer;subscriptionCreatedConsumer;subscriptionExpiredConsumer
+    stream:
+      bindings:
+        userCreatedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_USER_CREATED:user-created}"
+          group: "${KAFKA_GROUP_USER_CREATED:business-user-created}"
+          content-type: "application/json"
+        subscriptionCreatedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_SUBSCRIPTION_CREATED:subscription-created}"
+          group: "${KAFKA_GROUP_SUBSCRIPTION_CREATED:business-subscription-created}"
+          content-type: "application/json"
+        subscriptionExpiredConsumer-in-0:
+          destination: "${KAFKA_TOPIC_SUBSCRIPTION_EXPIRED:subscription-expired}"
+          group: "${KAFKA_GROUP_SUBSCRIPTION_EXPIRED:business-subscription-expired}"
+          content-type: "application/json"
+        businessCreated-out-0:
+          destination: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}"
+          content-type: "application/json"
+      kafka:
+        bindings:
+          userCreatedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_USER_CREATED:user-created}.dlq"
+          subscriptionCreatedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_SUBSCRIPTION_CREATED:subscription-created}.dlq"
+          subscriptionExpiredConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_SUBSCRIPTION_EXPIRED:subscription-expired}.dlq"

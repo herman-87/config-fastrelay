@@ -3,18 +3,37 @@ spring:
     name: "${SPRING_APPLICATION_NAME:stats}"
   datasource:
     url: "${DB_URL}"
-  kafka:
-    bootstrap-servers: kafka:29092
-    consumer:
-      group-id: "stats-service"
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-        spring.json.trusted.packages: "*"
-        auto-offset-reset: "earliest"
-        enable-auto-commit: false
-        isolation-level: "read_committed"
-    topic:
-      article-created: "article-created"
-      promotion-created: "promotion-created"
-      business-created: "business-created"
+  cloud:
+    function:
+      definition: articleCreatedConsumer;promotionCreatedConsumer;businessCreatedConsumer
+    stream:
+      bindings:
+        articleCreatedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_ARTICLE_CREATED:article-created}"
+          group: "${KAFKA_GROUP_ID:stats-service}"
+          content-type: "application/json"
+        promotionCreatedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_PROMOTION_CREATED:promotion-created}"
+          group: "${KAFKA_GROUP_ID:stats-service}"
+          content-type: "application/json"
+        businessCreatedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}"
+          group: "${KAFKA_GROUP_ID:stats-service}"
+          content-type: "application/json"
+      kafka:
+        bindings:
+          articleCreatedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_ARTICLE_CREATED:article-created}.dlq"
+          promotionCreatedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_PROMOTION_CREATED:promotion-created}.dlq"
+          businessCreatedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}.dlq"

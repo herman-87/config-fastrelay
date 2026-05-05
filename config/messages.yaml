@@ -3,18 +3,37 @@ spring:
     name: "${SPRING_APPLICATION_NAME:messages}"
   datasource:
     url: "${DB_URL}"
-  kafka:
-    bootstrap-servers: kafka:29092
-    consumer:
-      group-id: "messages-service"
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-        spring.json.trusted.packages: "*"
-        auto-offset-reset: "earliest"
-        enable-auto-commit: false
-        isolation-level: "read_committed"
-    topic:
-      business-created: "business-created"
-      conversation-created: "conversation-created"
-      order-request-created: "order-request-created"
+  cloud:
+    function:
+      definition: businessCreatedConsumer;conversationCreatedConsumer;orderRequestCreatedConsumer
+    stream:
+      bindings:
+        businessCreatedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}"
+          group: "${KAFKA_GROUP_ID:messages-service}"
+          content-type: "application/json"
+        conversationCreatedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_CONVERSATION_CREATED:conversation-created}"
+          group: "${KAFKA_GROUP_ID:messages-service}"
+          content-type: "application/json"
+        orderRequestCreatedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_ORDER_REQUEST_CREATED:order-request-created}"
+          group: "${KAFKA_GROUP_ID:messages-service}"
+          content-type: "application/json"
+      kafka:
+        bindings:
+          businessCreatedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}.dlq"
+          conversationCreatedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_CONVERSATION_CREATED:conversation-created}.dlq"
+          orderRequestCreatedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_ORDER_REQUEST_CREATED:order-request-created}.dlq"

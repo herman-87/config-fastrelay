@@ -1,6 +1,11 @@
 spring:
-  kafka:
-    bootstrap-servers: "kafka:29092"
+  cloud:
+    stream:
+      default-binder: kafka
+      kafka:
+        binder:
+          brokers: "kafka:29092"
+          auto-create-topics: true
   jackson:
     default-property-inclusion: "NON_ABSENT"
   security:
