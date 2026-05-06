@@ -1,6 +1,12 @@
 spring:
   application:
     name: "${SPRING_APPLICATION_NAME:product}"
+  cache:
+    type: redis
+  data:
+    redis:
+      host: "${REDIS_HOST:redis}"
+      port: "${REDIS_PORT:6379}"
   datasource:
     url: "${DB_URL}"
   cloud:

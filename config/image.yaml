@@ -1,7 +1,12 @@
 spring:
   application:
     name: "${SPRING_APPLICATION_NAME:image}"
-
+  cache:
+    type: redis
+  data:
+    redis:
+      host: "${REDIS_HOST:redis}"
+      port: "${REDIS_PORT:6379}"
   servlet:
     multipart:
       max-file-size: 10MB

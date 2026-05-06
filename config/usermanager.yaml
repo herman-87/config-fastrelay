@@ -4,6 +4,12 @@ spring:
   datasource:
     url: "${DB_URL}"
     driver-class-name: "${DB_DRIVER_CLASS_NAME:org.postgresql.Driver}"
+  cache:
+    type: redis
+  data:
+    redis:
+      host: "${REDIS_HOST:redis}"
+      port: "${REDIS_PORT:6379}"
   cloud:
     stream:
       bindings:
