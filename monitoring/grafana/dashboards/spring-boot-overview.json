@@ -1,0 +1,125 @@
+{
+  "title": "Spring Boot - Overview",
+  "uid": "spring-boot-overview",
+  "tags": ["spring", "jvm"],
+  "schemaVersion": 36,
+  "version": 1,
+  "timezone": "browser",
+  "editable": true,
+  "panels": [
+    {
+      "title": "CPU Usage",
+      "type": "timeseries",
+      "gridPos": {"x": 0, "y": 0, "w": 8, "h": 8},
+      "targets": [
+        {"expr": "system_cpu_usage{application=~\"$service\"}", "legendFormat": "System {{application}}"},
+        {"expr": "process_cpu_usage{application=~\"$service\"}", "legendFormat": "Process {{application}}"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "percentunit", "min": 0, "max": 1}}
+    },
+    {
+      "title": "JVM Memory Heap",
+      "type": "timeseries",
+      "gridPos": {"x": 8, "y": 0, "w": 8, "h": 8},
+      "targets": [
+        {"expr": "jvm_memory_used_bytes{application=~\"$service\", area=\"heap\"}", "legendFormat": "Used {{application}} - {{id}}"},
+        {"expr": "jvm_memory_max_bytes{application=~\"$service\", area=\"heap\"}", "legendFormat": "Max {{application}} - {{id}}"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "bytes"}}
+    },
+    {
+      "title": "JVM Memory Non-Heap",
+      "type": "timeseries",
+      "gridPos": {"x": 16, "y": 0, "w": 8, "h": 8},
+      "targets": [
+        {"expr": "jvm_memory_used_bytes{application=~\"$service\", area=\"nonheap\"}", "legendFormat": "Used {{application}} - {{id}}"},
+        {"expr": "jvm_memory_max_bytes{application=~\"$service\", area=\"nonheap\"}", "legendFormat": "Max {{application}} - {{id}}"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "bytes"}}
+    },
+    {
+      "title": "HTTP Requests Rate",
+      "type": "timeseries",
+      "gridPos": {"x": 0, "y": 8, "w": 12, "h": 8},
+      "targets": [
+        {"expr": "rate(http_server_requests_seconds_count{application=~\"$service\"}[1m])", "legendFormat": "{{application}} - {{method}} {{uri}}"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "reqps"}}
+    },
+    {
+      "title": "HTTP Request Duration (P99)",
+      "type": "timeseries",
+      "gridPos": {"x": 12, "y": 8, "w": 12, "h": 8},
+      "targets": [
+        {"expr": "histogram_quantile(0.99, rate(http_server_requests_seconds_bucket{application=~\"$service\"}[1m]))", "legendFormat": "P99 {{application}} - {{method}} {{uri}}"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "s"}}
+    },
+    {
+      "title": "Active Threads",
+      "type": "timeseries",
+      "gridPos": {"x": 0, "y": 16, "w": 6, "h": 8},
+      "targets": [
+        {"expr": "jvm_threads_live_threads{application=~\"$service\"}", "legendFormat": "Live {{application}}"},
+        {"expr": "jvm_threads_daemon_threads{application=~\"$service\"}", "legendFormat": "Daemon {{application}}"}
+      ]
+    },
+    {
+      "title": "GC Pause Duration",
+      "type": "timeseries",
+      "gridPos": {"x": 6, "y": 16, "w": 6, "h": 8},
+      "targets": [
+        {"expr": "rate(jvm_gc_pause_seconds_sum{application=~\"$service\"}[1m])", "legendFormat": "{{application}} - {{cause}}"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "s"}}
+    },
+    {
+      "title": "DB Connection Pool (HikariCP)",
+      "type": "timeseries",
+      "gridPos": {"x": 12, "y": 16, "w": 6, "h": 8},
+      "targets": [
+        {"expr": "hikaricp_connections_active{application=~\"$service\"}", "legendFormat": "Active {{application}}"},
+        {"expr": "hikaricp_connections_idle{application=~\"$service\"}", "legendFormat": "Idle {{application}}"},
+        {"expr": "hikaricp_connections_pending{application=~\"$service\"}", "legendFormat": "Pending {{application}}"}
+      ]
+    },
+    {
+      "title": "Log Events Rate",
+      "type": "timeseries",
+      "gridPos": {"x": 18, "y": 16, "w": 6, "h": 8},
+      "targets": [
+        {"expr": "rate(logback_events_total{application=~\"$service\"}[1m])", "legendFormat": "{{application}} - {{level}}"}
+      ]
+    },
+    {
+      "title": "Loaded Classes",
+      "type": "timeseries",
+      "gridPos": {"x": 0, "y": 24, "w": 8, "h": 8},
+      "targets": [
+        {"expr": "jvm_classes_loaded_classes{application=~\"$service\"}", "legendFormat": "Loaded {{application}}"}
+      ]
+    },
+    {
+      "title": "Upstream / Downstream Response Time",
+      "type": "timeseries",
+      "gridPos": {"x": 8, "y": 24, "w": 8, "h": 8},
+      "targets": [
+        {"expr": "rate(spring_cloud_gateway_requests_seconds_sum{application=~\"$service\"}[1m]) / rate(spring_cloud_gateway_requests_seconds_count{application=~\"$service\"}[1m])", "legendFormat": "{{application}} - {{route_id}}"}
+      ],
+      "fieldConfig": {"defaults": {"unit": "s"}}
+    },
+    {
+      "title": "Current Active Sessions (Tomcat)",
+      "type": "timeseries",
+      "gridPos": {"x": 16, "y": 24, "w": 8, "h": 8},
+      "targets": [
+        {"expr": "tomcat_sessions_active_current_sessions{application=~\"$service\"}", "legendFormat": "{{application}}"}
+      ]
+    }
+  ],
+  "templating": {
+    "list": [
+      {"name": "service", "type": "query", "query": "label_values(application)", "refresh": 1, "includeAll": true, "multi": true, "allValue": ".*"}
+    ]
+  }
+}

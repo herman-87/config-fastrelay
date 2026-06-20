@@ -118,7 +118,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,gateway,routes,loggers,metrics
+        include: health,info,prometheus,gateway,routes,loggers,metrics
   endpoint:
     gateway:
       enabled: true

@@ -1,0 +1,102 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'discovery-server'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['discovery-server:8761']
+        labels:
+          application: 'discovery-server'
+
+  - job_name: 'config-server'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['config-server:8088']
+        labels:
+          application: 'config-server'
+
+  - job_name: 'gateway'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['gateway:8060']
+        labels:
+          application: 'gateway'
+
+  - job_name: 'user'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['user:8083']
+        labels:
+          application: 'user'
+
+  - job_name: 'business'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['business:8084']
+        labels:
+          application: 'business'
+
+  - job_name: 'image'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['image:8085']
+        labels:
+          application: 'image'
+
+  - job_name: 'product'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['product:8086']
+        labels:
+          application: 'product'
+
+  - job_name: 'order'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['order:8089']
+        labels:
+          application: 'order'
+
+  - job_name: 'payment'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['payment:8087']
+        labels:
+          application: 'payment'
+
+  - job_name: 'likes'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['likes:8090']
+        labels:
+          application: 'likes'
+
+  - job_name: 'feedback'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['feedback:8091']
+        labels:
+          application: 'feedback'
+
+  - job_name: 'messages'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['messages:8092']
+        labels:
+          application: 'messages'
+
+  - job_name: 'subscription'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['subscription:8093']
+        labels:
+          application: 'subscription'
+
+  - job_name: 'stats'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['stats:8094']
+        labels:
+          application: 'stats'

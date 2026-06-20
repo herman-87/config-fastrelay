@@ -1,0 +1,61 @@
+{
+  "title": "Logs & Tracing",
+  "uid": "logs-tracing",
+  "tags": ["logs", "tracing", "loki", "zipkin"],
+  "schemaVersion": 36,
+  "version": 1,
+  "timezone": "browser",
+  "editable": true,
+  "panels": [
+    {
+      "title": "Logs Explorer",
+      "type": "logs",
+      "gridPos": {"x": 0, "y": 0, "w": 24, "h": 12},
+      "datasource": {"type": "loki", "uid": "Loki"},
+      "targets": [{"expr": "{service=~\"$service\"} |= \"$search\"", "refId": "A"}],
+      "options": {"showLabels": false, "showTime": true, "wrapLogMessage": true, "prettifyLogJson": true, "enableLogDetails": true}
+    },
+    {
+      "title": "Log Volume per Service",
+      "type": "timeseries",
+      "gridPos": {"x": 0, "y": 12, "w": 12, "h": 8},
+      "datasource": {"type": "loki", "uid": "Loki"},
+      "targets": [{"expr": "sum by(service) (rate({service=~\"$service\"} |= \"$search\" [1m]))", "legendFormat": "{{service}}", "refId": "A"}]
+    },
+    {
+      "title": "Log Levels Distribution",
+      "type": "piechart",
+      "gridPos": {"x": 12, "y": 12, "w": 12, "h": 8},
+      "datasource": {"type": "loki", "uid": "Loki"},
+      "targets": [{"expr": "sum by(stream) (count_over_time({service=~\"$service\"} |= \"$search\" [$__range]))", "legendFormat": "{{stream}}", "refId": "A"}]
+    },
+    {
+      "title": "Error Logs Timeline",
+      "type": "timeseries",
+      "gridPos": {"x": 0, "y": 20, "w": 24, "h": 8},
+      "datasource": {"type": "loki", "uid": "Loki"},
+      "targets": [{"expr": "sum by(service) (rate({service=~\"$service\", stream=\"stderr\"} |= \"$search\" [1m]))", "legendFormat": "{{service}}", "refId": "A"}]
+    },
+    {
+      "title": "Trace Duration by Service",
+      "type": "timeseries",
+      "gridPos": {"x": 0, "y": 28, "w": 12, "h": 8},
+      "datasource": {"type": "zipkin", "uid": "Zipkin"},
+      "targets": [{"refId": "A", "query": "serviceName", "serviceName": "$zipkinService", "spanName": "all", "lookbackType": "custom", "lookback": 3600000, "minDuration": null, "maxDuration": null, "limit": 100, "filterByParent": false}]
+    },
+    {
+      "title": "Recent Traces",
+      "type": "table",
+      "gridPos": {"x": 12, "y": 28, "w": 12, "h": 8},
+      "datasource": {"type": "zipkin", "uid": "Zipkin"},
+      "targets": [{"refId": "A", "query": "serviceName", "serviceName": "$zipkinService", "spanName": "all", "lookbackType": "custom", "lookback": 1800000, "minDuration": null, "maxDuration": null, "limit": 50, "filterByParent": false}]
+    }
+  ],
+  "templating": {
+    "list": [
+      {"name": "service", "type": "query", "query": "label_values(service)", "datasource": {"type": "loki", "uid": "Loki"}, "refresh": 1, "includeAll": true, "multi": true, "allValue": ".*", "label": "Service"},
+      {"name": "search", "type": "textbox", "query": "", "label": "Search in logs"},
+      {"name": "zipkinService", "type": "query", "query": "services()", "datasource": {"type": "zipkin", "uid": "Zipkin"}, "refresh": 1, "includeAll": true, "label": "Zipkin Service"}
+    ]
+  }
+}
