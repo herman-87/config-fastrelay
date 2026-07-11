@@ -115,7 +115,7 @@ Ce document liste les principaux points de saturation probables de la plateforme
 
 - paiement lent ou instable
 - temps de réponse fortement dépendant du prestataire externe
-- commandes bloquées par latence Monetbil
+- commandes bloquées par latence du provider externe
 
 ### Causes probables
 

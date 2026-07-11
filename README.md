@@ -45,7 +45,7 @@ curl http://localhost:8060/actuator/health
 - Gestion des utilisateurs et authentification
 - Gestion des produits et articles
 - Gestion des commandes
-- Paiements intégrés (Monetbil, Pawapay)
+- Paiements intégrés (pawaPay)
 - Abonnements et subscriptions
 - Messagerie entre utilisateurs
 - Système de likes et feedback
@@ -55,7 +55,7 @@ curl http://localhost:8060/actuator/health
 ### Objectifs métier
 
 - Fournir une plateforme d'e-commerce scalable
-- Gérer les paiements mobiles via Monetbil/Pawapay
+- Gérer les paiements mobiles via pawaPay
 - Permettre la création de boutiques (business)
 - Gérer les abonnements premium
 - Analyser les données avec des statistiques
@@ -120,7 +120,7 @@ curl http://localhost:8060/actuator/health
 | 5 | **business** | Gestion des entreprises | 8084 | Spring Boot + Kafka |
 | 6 | **image** | Upload/Stockage images | 8085 | Spring Boot + MinIO |
 | 7 | **product** | Gestion des produits | 8086 | Spring Boot + Kafka |
-| 8 | **payment** | Paiements (Monetbil/Pawapay) | 8087 | Spring Boot + Kafka |
+| 8 | **payment** | Paiements (pawaPay) | 8087 | Spring Boot + Kafka |
 | 9 | **likes** | Système de likes | 8090 | Spring Boot |
 | 10 | **feedback** | Retours utilisateurs | 8091 | Spring Boot |
 | 11 | **messages** | Messagerie interne | 8092 | Spring Boot + Kafka |
@@ -172,7 +172,7 @@ curl http://localhost:8060/actuator/health
 - **Topics Kafka** : `article-created`, `promotion-created`
 
 #### payment
-- **Rôle** : Paiements integrados (Monetbil, Pawapay)
+- **Rôle** : Paiements integrados (pawaPay)
 - **Technologie** : Spring Boot + Kafka + Spring Batch
 - **Port** : 8087
 - **Fonctionnalités** : Webhooks, compte plateforme, tokens API externes

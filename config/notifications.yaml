@@ -133,5 +133,14 @@ notification:
     from: "${NOTIFICATION_EMAIL_FROM:fastrelays@gmail.com}"
     max-retries: "${NOTIFICATION_EMAIL_MAX_RETRIES:3}"
 
+notifications:
+  scheduler:
+    interval: "${NOTIFICATIONS_SCHEDULER_INTERVAL:30000}"
+
+nodemailer:
+  api:
+    base-url: "${NODEMAILER_API_BASE_URL:http://nodemailer:3000/api/v1}"
+    key: "${NODEMAILER_API_KEY}"
+
 server:
   port: "${SERVER_PORT:8095}"

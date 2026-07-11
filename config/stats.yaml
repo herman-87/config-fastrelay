@@ -11,7 +11,7 @@ spring:
     url: "${DB_URL}"
   cloud:
     function:
-      definition: articleCreatedConsumer;promotionCreatedConsumer;businessCreatedConsumer
+      definition: articleCreatedConsumer;promotionCreatedConsumer;businessCreatedConsumer;orderRequestCreatedConsumer;likeCreatedConsumer;likeRemovedConsumer;userCreatedConsumer;subscriptionCreatedConsumer;subscriptionExpiredConsumer
     stream:
       bindings:
         articleCreatedConsumer-in-0:
@@ -24,6 +24,30 @@ spring:
           content-type: "application/json"
         businessCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}"
+          group: "${KAFKA_GROUP_ID:stats-service}"
+          content-type: "application/json"
+        orderRequestCreatedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_ORDER_REQUEST_CREATED:order-request-created}"
+          group: "${KAFKA_GROUP_ID:stats-service}"
+          content-type: "application/json"
+        likeCreatedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_LIKE_CREATED:like-created}"
+          group: "${KAFKA_GROUP_ID:stats-service}"
+          content-type: "application/json"
+        likeRemovedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_LIKE_REMOVED:like-removed}"
+          group: "${KAFKA_GROUP_ID:stats-service}"
+          content-type: "application/json"
+        userCreatedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_USER_CREATED:user-created}"
+          group: "${KAFKA_GROUP_ID:stats-service}"
+          content-type: "application/json"
+        subscriptionCreatedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_SUBSCRIPTION_CREATED:subscription-created}"
+          group: "${KAFKA_GROUP_ID:stats-service}"
+          content-type: "application/json"
+        subscriptionExpiredConsumer-in-0:
+          destination: "${KAFKA_TOPIC_SUBSCRIPTION_EXPIRED:subscription-expired}"
           group: "${KAFKA_GROUP_ID:stats-service}"
           content-type: "application/json"
       kafka:
@@ -43,3 +67,33 @@ spring:
               start-offset: earliest
               enable-dlq: true
               dlq-name: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}.dlq"
+          orderRequestCreatedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_ORDER_REQUEST_CREATED:order-request-created}.dlq"
+          likeCreatedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_LIKE_CREATED:like-created}.dlq"
+          likeRemovedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_LIKE_REMOVED:like-removed}.dlq"
+          userCreatedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_USER_CREATED:user-created}.dlq"
+          subscriptionCreatedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_SUBSCRIPTION_CREATED:subscription-created}.dlq"
+          subscriptionExpiredConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_SUBSCRIPTION_EXPIRED:subscription-expired}.dlq"

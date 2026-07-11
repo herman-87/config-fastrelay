@@ -34,7 +34,7 @@ Le périmètre inspecté représente **environ 98 opérations HTTP** hors `templ
 | Auth / utilisateur | `/public/user/register`, `/user/me`, `/user/{id}` | moyenne |
 | Catalogue / business | `/public/business`, `/public/article`, `/public/promotion`, `/public/business/{id}` | forte |
 | Commande | `/my/cart`, `/businesses/{businessId}/order`, `/my/order`, transitions de statut | très forte |
-| Paiement | `/transfer-request/monetbil`, `/transfer-request/internal` | critique |
+| Paiement | `/transfer-request`, `/transfer-request/internal` | critique |
 | Images | `/my/images`, `/public/images/{imageId}` | forte sur réseau et I/O |
 | Messagerie | `/conversations/{conversationId}/messages` | moyenne à forte |
 | Engagement | likes, feedback, ratings | moyenne |
@@ -118,7 +118,7 @@ Les chiffres ci-dessous distinguent:
 | Écriture simple | like/unlike, feedback, update user | 45 à 100 ms | 120 à 220 ms | 160 à 330 ms | 30 à 80 req/s |
 | Écriture métier complexe | create article, create order, change status order | 90 à 220 ms | 250 à 500 ms | 220 à 560 ms | 12 à 35 req/s |
 | Paiement interne | `/transfer-request/internal` | 120 à 260 ms | 300 à 650 ms | 250 à 700 ms | 8 à 20 req/s |
-| Paiement Monetbil | `/transfer-request/monetbil` | 300 à 900 ms | 1,2 à 2,5 s | 450 ms à 2,7 s | 2 à 8 req/s |
+| Paiement pawaPay | `POST /deposits` + callback | 300 à 900 ms | 1,2 à 2,5 s | 450 ms à 2,7 s | 2 à 8 req/s |
 | Messages | lecture/écriture conversation | 35 à 90 ms | 100 à 220 ms | 140 à 320 ms | 35 à 90 req/s |
 | Upload image | `/my/images` | 250 ms à 1,5 s | 2 à 5 s | 700 ms à 6 s | 1 à 6 req/s |
 
@@ -131,7 +131,7 @@ Les chiffres ci-dessous distinguent:
 | `business` | listes, détails, collaborations | 25 à 60 req/s | lecture catalogue + joins |
 | `products` | catalogue, promotions, filtres | 20 à 55 req/s | pagination et recherche |
 | `order` | panier + création + workflow | 12 à 30 req/s | transactions, DB, appels interservices |
-| `payment` | appels tiers | 2 à 15 req/s selon mix | latence Monetbil / résilience |
+| `payment` | appels tiers | 2 à 15 req/s selon mix | latence pawaPay / résilience |
 | `images` | upload + metadata | 5 à 25 req/s metadata, 1 à 6 upload/s | réseau et stockage objet |
 | `messages` | conversation | 30 à 70 req/s | polling si pas websocket |
 | `likes` / `feedback` | engagement | 40 à 100 req/s | contention DB sous pics |
@@ -243,7 +243,7 @@ Conséquence:
 | Lecture catalogue non cachée | beaucoup de GET publics | saturation `products` / `business` |
 | Création de commande synchrone | validations interservices + DB + paiement | baisse forte de débit |
 | Upload direct via backend | réseau mobile + corps multipart | threads occupés et latence élevée |
-| Paiement externe | dépendance Monetbil / API tierce | indisponibilité partielle ou lenteur globale |
+| Paiement externe | dépendance pawaPay / API tierce | indisponibilité partielle ou lenteur globale |
 | Logs DEBUG actifs | vu dans `order` | surcoût CPU/I/O et bruit observabilité |
 
 ## Recommandations techniques
