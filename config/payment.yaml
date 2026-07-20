@@ -44,8 +44,28 @@ spring:
 app:
   account:
     platform-number: "${APP_PLATFORM_ACCOUNT_NUMBER:671952927}"
-  webhook:
-    base-url: "${APP_WEBHOOK_BASE_URL:https://fastrelays/payment/pawapay/callback}"
+  providers:
+    pawapay:
+      base-url: "${PAYMENT_EXTERNAL_SERVICE_PAWAPAY_URL:https://api.sandbox.pawapay.io/v2}"
+      bearer-token: "${PAYMENT_PAWAPAY_BEARER_TOKEN:}"
+      webhook-base-url: "${APP_WEBHOOK_BASE_URL_PAWAPAY:https://fastrelays/payment/pawapay/callback}"
+      account-number: "${APP_PROVIDER_PAWAPAY_ACCOUNT_NUMBER:1000000002}"
+      default-balance: "${APP_PROVIDER_PAWAPAY_DEFAULT_BALANCE:0}"
+    sebpay:
+      base-url: "${PAYMENT_EXTERNAL_SERVICE_SEBPAY_URL:https://newapi.sebpay.bj/api/v1}"
+      public-key: "${PAYMENT_SEBPAY_PUBLIC_KEY:}"
+      secret-key: "${PAYMENT_SEBPAY_SECRET_KEY:}"
+      webhook-base-url: "${APP_WEBHOOK_BASE_URL_SEBPAY:https://fastrelays/sebpay/callback}"
+      account-number: "${APP_PROVIDER_SEBPAY_ACCOUNT_NUMBER:1000000003}"
+      default-balance: "${APP_PROVIDER_SEBPAY_DEFAULT_BALANCE:0}"
+    moneyfusion:
+      enabled: "${PAYMENT_EXTERNAL_SERVICE_MONEYFUSION_ENABLED:true}"
+      url: "${PAYMENT_EXTERNAL_SERVICE_MONEYFUSION_URL:https://pay.moneyfusion.net}"
+      api-path: "${PAYMENT_MONEYFUSION_API_PATH:8fe01a7c164562fd}"
+      private-key: "${PAYMENT_MONEYFUSION_PRIVATE_KEY:}"
+      webhook-base-url: "${APP_WEBHOOK_BASE_URL_MONEYFUSION:https://fastrelays/payment/moneyfusion/callback}"
+      account-number: "${APP_PROVIDER_MONEYFUSION_ACCOUNT_NUMBER:1000000004}"
+      default-balance: "${APP_PROVIDER_MONEYFUSION_DEFAULT_BALANCE:0}"
   external:
     service:
       pawapay:
@@ -53,3 +73,8 @@ app:
         bearer-token: "${PAYMENT_PAWAPAY_BEARER_TOKEN:}"
         url: "${PAYMENT_EXTERNAL_SERVICE_PAWAPAY_URL}"
         token: "${PAYMENT_EXTERNAL_SERVICE_PAWAPAY_TOKEN}"
+      moneyfusion:
+        enabled: "${PAYMENT_EXTERNAL_SERVICE_MONEYFUSION_ENABLED:true}"
+        url: "${PAYMENT_EXTERNAL_SERVICE_MONEYFUSION_URL:https://pay.moneyfusion.net}"
+        api-path: "${PAYMENT_MONEYFUSION_API_PATH:}"
+        private-key: "${PAYMENT_MONEYFUSION_PRIVATE_KEY:}"
