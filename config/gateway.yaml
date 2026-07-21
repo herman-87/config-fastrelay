@@ -55,6 +55,11 @@ spring:
           filters:
             - RewritePath=/product/(?<segment>.*), /${segment}
 
+        - id: payment-callbacks
+          uri: lb://payment
+          predicates:
+            - Path=/pawapay/**,/sebpay/**,/moneyfusion/**
+
         - id: payment
           uri: lb://payment
           predicates:
