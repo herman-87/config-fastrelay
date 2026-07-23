@@ -60,8 +60,8 @@ app:
       default-balance: "${APP_PROVIDER_SEBPAY_DEFAULT_BALANCE:0}"
     moneyfusion:
       enabled: "${PAYMENT_EXTERNAL_SERVICE_MONEYFUSION_ENABLED:true}"
-      url: "${PAYMENT_EXTERNAL_SERVICE_MONEYFUSION_URL:https://pay.moneyfusion.net}"
-      api-path: "${PAYMENT_MONEYFUSION_API_PATH:8fe01a7c164562fd}"
+      base-url: "${PAYMENT_EXTERNAL_SERVICE_MONEYFUSION_URL:https://pay.moneyfusion.net}"
+      api-path: "${PAYMENT_MONEYFUSION_API_PATH:Fast_relays/73afe0e6111f0e1a/pay}"
       private-key: "${PAYMENT_MONEYFUSION_PRIVATE_KEY:}"
       webhook-base-url: "${APP_WEBHOOK_BASE_URL_MONEYFUSION:https://fastrelays/moneyfusion}"
       account-number: "${APP_PROVIDER_MONEYFUSION_ACCOUNT_NUMBER:1000000004}"
