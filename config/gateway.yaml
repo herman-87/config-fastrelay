@@ -58,7 +58,7 @@ spring:
         - id: payment-callbacks
           uri: lb://payment
           predicates:
-            - Path=/pawapay/**,/sebpay/**,/moneyfusion/**
+            - Path=/pawapay/**,/sebpay/**,/moneyfusion/**,/fapshi/**
 
         - id: payment
           uri: lb://payment
