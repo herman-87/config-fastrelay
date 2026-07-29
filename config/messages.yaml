@@ -11,33 +11,15 @@ spring:
     url: "${DB_URL}"
   cloud:
     function:
-      definition: businessCreatedConsumer;conversationCreatedConsumer;orderRequestCreatedConsumer
+      definition: orderRequestCreatedConsumer
     stream:
       bindings:
-        businessCreatedConsumer-in-0:
-          destination: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}"
-          group: "${KAFKA_GROUP_ID:messages-service}"
-          content-type: "application/json"
-        conversationCreatedConsumer-in-0:
-          destination: "${KAFKA_TOPIC_CONVERSATION_CREATED:conversation-created}"
-          group: "${KAFKA_GROUP_ID:messages-service}"
-          content-type: "application/json"
         orderRequestCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_ORDER_REQUEST_CREATED:order-request-created}"
           group: "${KAFKA_GROUP_ID:messages-service}"
           content-type: "application/json"
       kafka:
         bindings:
-          businessCreatedConsumer-in-0:
-            consumer:
-              start-offset: earliest
-              enable-dlq: true
-              dlq-name: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}.dlq"
-          conversationCreatedConsumer-in-0:
-            consumer:
-              start-offset: earliest
-              enable-dlq: true
-              dlq-name: "${KAFKA_TOPIC_CONVERSATION_CREATED:conversation-created}.dlq"
           orderRequestCreatedConsumer-in-0:
             consumer:
               start-offset: earliest
