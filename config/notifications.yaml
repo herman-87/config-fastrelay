@@ -128,19 +128,17 @@ spring:
               enable-dlq: true
               dlq-name: "${KAFKA_TOPIC_ORDER_DELIVERY_ACCEPTED:order-delivery-accepted}.dlq"
 
-notification:
-  email:
-    from: "${NOTIFICATION_EMAIL_FROM:fastrelays@gmail.com}"
-    max-retries: "${NOTIFICATION_EMAIL_MAX_RETRIES:3}"
-
 notifications:
+  email:
+    from: "${NOTIFICATIONS_EMAIL_FROM:fastrelays@gmail.com}"
+    max-retries: "${NOTIFICATIONS_EMAIL_MAX_RETRIES:3}"
   scheduler:
     interval: "${NOTIFICATIONS_SCHEDULER_INTERVAL:30000}"
+    expire-cron: "${NOTIFICATIONS_SCHEDULER_EXPIRE_CRON:0 0 0 * * *}"
+    expiry-days: "${NOTIFICATIONS_SCHEDULER_EXPIRY_DAYS:30}"
 
-nodemailer:
-  api:
-    base-url: "${NODEMAILER_API_BASE_URL:http://nodemailer:3000/api/v1}"
-    key: "${NODEMAILER_API_KEY}"
+mailer:
+  base-url: "${MAILER_BASE_URL:http://mailer:3000}"
 
 server:
   port: "${SERVER_PORT:8095}"
