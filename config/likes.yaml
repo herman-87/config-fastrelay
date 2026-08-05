@@ -9,3 +9,12 @@ spring:
     redis:
       host: "${REDIS_HOST:redis}"
       port: "${REDIS_PORT:6379}"
+  cloud:
+    stream:
+      bindings:
+        likeCreatedOutput:
+          destination: "${KAFKA_TOPIC_LIKE_CREATED:like-created}"
+          content-type: "application/json"
+        likeRemovedOutput:
+          destination: "${KAFKA_TOPIC_LIKE_REMOVED:like-removed}"
+          content-type: "application/json"

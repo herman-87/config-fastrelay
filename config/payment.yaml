@@ -26,7 +26,7 @@ spring:
           group: "${KAFKA_GROUP_ID:payment-service}"
           content-type: "application/json"
         transferCreated-out-0:
-          destination: "${KAFKA_TOPIC_TRANSFER_CREATED:transfer-request-created}"
+          destination: "${KAFKA_TOPIC_TRANSFER_REQUEST_CREATED:transfer-request-created}"
           content-type: "application/json"
       kafka:
         bindings:

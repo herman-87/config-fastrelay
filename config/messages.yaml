@@ -18,6 +18,9 @@ spring:
           destination: "${KAFKA_TOPIC_ORDER_REQUEST_CREATED:order-request-created}"
           group: "${KAFKA_GROUP_ID:messages-service}"
           content-type: "application/json"
+        conversationCreated-out-0:
+          destination: "${KAFKA_TOPIC_CONVERSATION_CREATED:conversation-created}"
+          content-type: "application/json"
       kafka:
         bindings:
           orderRequestCreatedConsumer-in-0:

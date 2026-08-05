@@ -18,6 +18,15 @@ spring:
         promotionCreated-out-0:
           destination: "${KAFKA_TOPIC_PROMOTION_CREATED:promotion-created}"
           content-type: "application/json"
+        productPublished-out-0:
+          destination: "${KAFKA_TOPIC_PRODUCT_PUBLISHED:product-published}"
+          content-type: "application/json"
+        promotionStarted-out-0:
+          destination: "${KAFKA_TOPIC_PROMOTION_STARTED:promotion-started}"
+          content-type: "application/json"
+        promotionClosed-out-0:
+          destination: "${KAFKA_TOPIC_PROMOTION_CLOSED:promotion-closed}"
+          content-type: "application/json"
 
 application:
   promotion:
