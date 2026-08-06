@@ -12,9 +12,9 @@ spring:
   cloud:
     stream:
       bindings:
-        likeCreatedOutput:
+        likeCreated-out-0:
           destination: "${KAFKA_TOPIC_LIKE_CREATED:like-created}"
           content-type: "application/json"
-        likeRemovedOutput:
+        likeRemoved-out-0:
           destination: "${KAFKA_TOPIC_LIKE_REMOVED:like-removed}"
           content-type: "application/json"

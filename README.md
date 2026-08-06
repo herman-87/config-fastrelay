@@ -191,12 +191,13 @@ curl http://localhost:8060/actuator/health
 - **Rôle** : Système de messagerie
 - **Technologie** : Spring Boot + Kafka
 - **Port** : 8092
-- **Topics Kafka** : `business-created`, `conversation-created`, `order-request-created`
+- **Topics Kafka** : `order-request-created`
 
 #### subscription
 - **Rôle** : Gestion des abonnements
 - **Technologie** : Spring Boot + Kafka
 - **Port** : 8093
+- **Topics Kafka** : `transfer-request-created` (consumer), `subscription-created`, `subscription-expired` (producers)
 - **Cron** : Vérification expiration quotidienne
 
 #### order
@@ -209,7 +210,7 @@ curl http://localhost:8060/actuator/health
 - **Rôle** : Agrégation des statistiques
 - **Technologie** : Spring Boot + Kafka
 - **Port** : 8094
-- **Topics Kafka** : `article-created`, `promotion-created`, `business-created`
+- **Topics Kafka** : `article-created`, `promotion-created`, `business-created`, `order-request-created`, `like-created`, `like-removed`, `user-created`, `subscription-created`, `subscription-expired`
 
 ---
 
@@ -469,13 +470,24 @@ curl -H "Authorization: Bearer $TOKEN" \
 
 | Topic | Producteur | Consommateur |
 |-------|-----------|--------------|
-| `user-created` | usermanager | business, order |
-| `business-created` | business | messages, stats |
-| `order-request-created` | order | messages, payment |
-| `subscription-created` | subscription | business |
-| `subscription-expired` | subscription | business |
-| `article-created` | product | stats |
-| `promotion-created` | product | stats |
+| `user-created` | user | business, order, payment, notifications, stats |
+| `business-created` | business | payment, notifications, stats |
+| `article-created` | product | notifications, stats |
+| `promotion-created` | product | notifications, stats |
+| `product-published` | product | notifications |
+| `promotion-started` | product | notifications |
+| `promotion-closed` | product | notifications |
+| `order-request-created` | order | messages, notifications, stats |
+| `order-paid` | order | notifications |
+| `order-accepted` | order | notifications |
+| `order-delivered` | order | notifications |
+| `order-delivery-accepted` | order | notifications |
+| `transfer-request-created` | payment | order, subscription |
+| `conversation-created` | messages | — |
+| `like-created` | likes | stats |
+| `like-removed` | likes | stats |
+| `subscription-created` | subscription | business, notifications, stats |
+| `subscription-expired` | subscription | business, stats |
 
 #### Configuration Kafka
 
