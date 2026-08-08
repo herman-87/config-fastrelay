@@ -1,0 +1,19 @@
+{
+  "type": "record",
+  "name": "InternalTransferCreatedEvent",
+  "namespace": "cm.fastrelays.events",
+  "fields": [
+    { "name": "transactionId", "type": "string", "logicalType": "uuid" },
+    { "name": "idempotencyKey", "type": ["null", "string"], "default": null, "logicalType": "uuid" },
+    { "name": "fromAccountId", "type": "string", "logicalType": "uuid" },
+    { "name": "toAccountId", "type": "string", "logicalType": "uuid" },
+    { "name": "amount", "type": "string" },
+    { "name": "currency", "type": "string" },
+    { "name": "status", "type": "StatusEnum" },
+    { "name": "reason", "type": "TransferReason" },
+    { "name": "description", "type": ["null", "string"], "default": null },
+    { "name": "createdAt", "type": ["null", "string"], "default": null, "format": "date-time" },
+    { "name": "userId", "type": ["null", "string"], "default": null, "logicalType": "uuid" },
+    { "name": "eventId", "type": "string", "logicalType": "uuid" }
+  ]
+}

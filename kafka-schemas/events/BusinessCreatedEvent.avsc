@@ -1,0 +1,20 @@
+{
+  "type": "record",
+  "name": "BusinessCreatedEvent",
+  "namespace": "cm.fastrelays.events",
+  "fields": [
+    { "name": "id", "type": "string", "logicalType": "uuid" },
+    { "name": "name", "type": "string" },
+    { "name": "description", "type": ["null", "string"], "default": null },
+    { "name": "address", "type": ["null", "string"], "default": null },
+    { "name": "phones", "type": ["null", { "type": "map", "values": { "type": "array", "items": "string" } }], "default": null },
+    { "name": "email", "type": ["null", "string"], "default": null },
+    { "name": "type", "type": ["null", "BusinessTypeEvent"], "default": null },
+    { "name": "active", "type": "boolean" },
+    { "name": "images", "type": ["null", { "type": "map", "values": "string" }], "default": null },
+    { "name": "ownerUsername", "type": "string" },
+    { "name": "userId", "type": ["null", "string"], "default": null, "logicalType": "uuid" },
+    { "name": "createdAt", "type": ["null", "string"], "default": null, "format": "date-time" },
+    { "name": "eventId", "type": "string", "logicalType": "uuid" }
+  ]
+}

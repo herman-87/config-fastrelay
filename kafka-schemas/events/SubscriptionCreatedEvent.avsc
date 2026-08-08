@@ -1,0 +1,17 @@
+{
+  "type": "record",
+  "name": "SubscriptionCreatedEvent",
+  "namespace": "cm.fastrelays.events",
+  "fields": [
+    { "name": "id", "type": "string", "logicalType": "uuid" },
+    { "name": "businessId", "type": "string", "logicalType": "uuid" },
+    { "name": "username", "type": "string" },
+    { "name": "planId", "type": "string", "logicalType": "uuid" },
+    { "name": "planName", "type": "string" },
+    { "name": "status", "type": "SubscriptionStatusEnum" },
+    { "name": "endDate", "type": "string", "format": "date-time" },
+    { "name": "autoRenew", "type": "boolean" },
+    { "name": "createdAt", "type": "string", "format": "date-time" },
+    { "name": "eventId", "type": "string", "logicalType": "uuid" }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "type": "record",
+  "name": "StatusEnum",
+  "namespace": "cm.fastrelays.events",
+  "type": "enum",
+  "symbols": ["PENDING", "PROCESSING", "COMPLETED", "FAILED", "REVERSED"]
+}

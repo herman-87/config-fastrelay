@@ -1,0 +1,12 @@
+{
+  "type": "record",
+  "name": "OrderRequestCreatedEvent",
+  "namespace": "cm.fastrelays.events",
+  "fields": [
+    { "name": "id", "type": "string", "logicalType": "uuid" },
+    { "name": "customerUsername", "type": "string" },
+    { "name": "userId", "type": ["null", "string"], "default": null, "logicalType": "uuid" },
+    { "name": "businessId", "type": "string", "logicalType": "uuid" },
+    { "name": "eventId", "type": "string", "logicalType": "uuid" }
+  ]
+}

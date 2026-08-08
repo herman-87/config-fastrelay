@@ -1,0 +1,9 @@
+{
+  "type": "record",
+  "name": "MoneyEvent",
+  "namespace": "cm.fastrelays.events",
+  "fields": [
+    { "name": "amount", "type": "string" },
+    { "name": "currency", "type": "string" }
+  ]
+}

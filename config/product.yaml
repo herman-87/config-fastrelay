@@ -14,19 +14,27 @@ spring:
       bindings:
         articleCreated-out-0:
           destination: "${KAFKA_TOPIC_ARTICLE_CREATED:article-created}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         promotionCreated-out-0:
           destination: "${KAFKA_TOPIC_PROMOTION_CREATED:promotion-created}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         productPublished-out-0:
           destination: "${KAFKA_TOPIC_PRODUCT_PUBLISHED:product-published}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
+        productUnpublished-out-0:
+          destination: "${KAFKA_TOPIC_PRODUCT_UNPUBLISHED:product-unpublished}"
+          content-type: "application/*+avro"
         promotionStarted-out-0:
           destination: "${KAFKA_TOPIC_PROMOTION_STARTED:promotion-started}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         promotionClosed-out-0:
           destination: "${KAFKA_TOPIC_PROMOTION_CLOSED:promotion-closed}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
+      kafka:
+        binder:
+          brokers: "${KAFKA_BOOTSTRAP_SERVERS:kafka:29092}"
+          configuration:
+            schema.registry.url: "${SCHEMA_REGISTRY_URL:http://schema-registry:8081}"
 
 application:
   promotion:

@@ -11,46 +11,58 @@ spring:
     url: "${DB_URL}"
   cloud:
     function:
-      definition: articleCreatedConsumer;promotionCreatedConsumer;businessCreatedConsumer;orderRequestCreatedConsumer;likeCreatedConsumer;likeRemovedConsumer;userCreatedConsumer;subscriptionCreatedConsumer;subscriptionExpiredConsumer
+      definition: articleCreatedConsumer;promotionCreatedConsumer;businessCreatedConsumer;orderRequestCreatedConsumer;likeCreatedConsumer;likeRemovedConsumer;userCreatedConsumer;subscriptionCreatedConsumer;subscriptionExpiredConsumer;productPublishedConsumer;productUnpublishedConsumer
     stream:
       bindings:
         articleCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_ARTICLE_CREATED:article-created}"
           group: "${KAFKA_GROUP_ID:stats-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         promotionCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_PROMOTION_CREATED:promotion-created}"
           group: "${KAFKA_GROUP_ID:stats-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         businessCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}"
           group: "${KAFKA_GROUP_ID:stats-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         orderRequestCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_ORDER_REQUEST_CREATED:order-request-created}"
           group: "${KAFKA_GROUP_ID:stats-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         likeCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_LIKE_CREATED:like-created}"
           group: "${KAFKA_GROUP_ID:stats-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         likeRemovedConsumer-in-0:
           destination: "${KAFKA_TOPIC_LIKE_REMOVED:like-removed}"
           group: "${KAFKA_GROUP_ID:stats-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         userCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_USER_CREATED:user-created}"
           group: "${KAFKA_GROUP_ID:stats-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         subscriptionCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_SUBSCRIPTION_CREATED:subscription-created}"
           group: "${KAFKA_GROUP_ID:stats-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         subscriptionExpiredConsumer-in-0:
           destination: "${KAFKA_TOPIC_SUBSCRIPTION_EXPIRED:subscription-expired}"
           group: "${KAFKA_GROUP_ID:stats-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
+        productPublishedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_PRODUCT_PUBLISHED:product-published}"
+          group: "${KAFKA_GROUP_ID:stats-service}"
+          content-type: "application/*+avro"
+        productUnpublishedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_PRODUCT_UNPUBLISHED:product-unpublished}"
+          group: "${KAFKA_GROUP_ID:stats-service}"
+          content-type: "application/*+avro"
       kafka:
+        binder:
+          brokers: "${KAFKA_BOOTSTRAP_SERVERS:kafka:29092}"
+          configuration:
+            schema.registry.url: "${SCHEMA_REGISTRY_URL:http://schema-registry:8081}"
         bindings:
           articleCreatedConsumer-in-0:
             consumer:
@@ -97,3 +109,13 @@ spring:
               start-offset: earliest
               enable-dlq: true
               dlq-name: "${KAFKA_TOPIC_SUBSCRIPTION_EXPIRED:subscription-expired}.dlq"
+          productPublishedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_PRODUCT_PUBLISHED:product-published}.dlq"
+          productUnpublishedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_PRODUCT_UNPUBLISHED:product-unpublished}.dlq"

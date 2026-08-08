@@ -474,7 +474,8 @@ curl -H "Authorization: Bearer $TOKEN" \
 | `business-created` | business | payment, notifications, stats |
 | `article-created` | product | notifications, stats |
 | `promotion-created` | product | notifications, stats |
-| `product-published` | product | notifications |
+| `product-published` | product | notifications, stats |
+| `product-unpublished` | product | stats |
 | `promotion-started` | product | notifications |
 | `promotion-closed` | product | notifications |
 | `order-request-created` | order | messages, notifications, stats |
