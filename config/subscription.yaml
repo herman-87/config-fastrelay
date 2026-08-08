@@ -17,13 +17,13 @@ spring:
         transferRequestCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_TRANSFER_REQUEST_CREATED:transfer-request-created}"
           group: "${KAFKA_GROUP_ID:subscription-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         subscriptionCreated-out-0:
           destination: "${KAFKA_TOPIC_SUBSCRIPTION_CREATED:subscription-created}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         subscriptionExpired-out-0:
           destination: "${KAFKA_TOPIC_SUBSCRIPTION_EXPIRED:subscription-expired}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
 
 subscription:
   expiration:

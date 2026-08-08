@@ -11,55 +11,55 @@ spring:
         orderRequestCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_ORDER_REQUEST_CREATED:order-request-created}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         userCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_USER_CREATED:user-created}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         businessCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         articleCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_ARTICLE_CREATED:article-created}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         promotionCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_PROMOTION_CREATED:promotion-created}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         subscriptionCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_SUBSCRIPTION_CREATED:subscription-created}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         productPublishedConsumer-in-0:
           destination: "${KAFKA_TOPIC_PRODUCT_PUBLISHED:product-published}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         promotionStartedConsumer-in-0:
           destination: "${KAFKA_TOPIC_PROMOTION_STARTED:promotion-started}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         promotionClosedConsumer-in-0:
           destination: "${KAFKA_TOPIC_PROMOTION_CLOSED:promotion-closed}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         orderPaidConsumer-in-0:
           destination: "${KAFKA_TOPIC_ORDER_PAID:order-paid}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         orderAcceptedConsumer-in-0:
           destination: "${KAFKA_TOPIC_ORDER_ACCEPTED:order-accepted}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         orderDeliveredConsumer-in-0:
           destination: "${KAFKA_TOPIC_ORDER_DELIVERED:order-delivered}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         orderDeliveryAcceptedConsumer-in-0:
           destination: "${KAFKA_TOPIC_ORDER_DELIVERY_ACCEPTED:order-delivery-accepted}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
       kafka:
         bindings:
           orderRequestCreatedConsumer-in-0:

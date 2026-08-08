@@ -17,18 +17,18 @@ spring:
         userCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_USER_CREATED:user-created}"
           group: "${KAFKA_GROUP_USER_CREATED:business-user-created}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         subscriptionCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_SUBSCRIPTION_CREATED:subscription-created}"
           group: "${KAFKA_GROUP_SUBSCRIPTION_CREATED:business-subscription-created}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         subscriptionExpiredConsumer-in-0:
           destination: "${KAFKA_TOPIC_SUBSCRIPTION_EXPIRED:subscription-expired}"
           group: "${KAFKA_GROUP_SUBSCRIPTION_EXPIRED:business-subscription-expired}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         businessCreated-out-0:
           destination: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
       kafka:
         bindings:
           userCreatedConsumer-in-0:

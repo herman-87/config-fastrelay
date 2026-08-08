@@ -6,6 +6,8 @@ spring:
         binder:
           brokers: "kafka:29092"
           auto-create-topics: true
+          configuration:
+            schema.registry.url: "${SCHEMA_REGISTRY_URL:http://schema-registry:8081}"
   jackson:
     default-property-inclusion: "NON_ABSENT"
   security:

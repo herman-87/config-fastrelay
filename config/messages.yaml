@@ -17,10 +17,10 @@ spring:
         orderRequestCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_ORDER_REQUEST_CREATED:order-request-created}"
           group: "${KAFKA_GROUP_ID:messages-service}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         conversationCreated-out-0:
           destination: "${KAFKA_TOPIC_CONVERSATION_CREATED:conversation-created}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
       kafka:
         bindings:
           orderRequestCreatedConsumer-in-0:

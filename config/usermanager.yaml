@@ -15,7 +15,7 @@ spring:
       bindings:
         userCreated-out-0:
           destination: "${KAFKA_TOPIC_USER_CREATED:user-created}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
 
 server:
   port: "${SERVER_PORT:8083}"

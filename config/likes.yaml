@@ -14,7 +14,7 @@ spring:
       bindings:
         likeCreated-out-0:
           destination: "${KAFKA_TOPIC_LIKE_CREATED:like-created}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
         likeRemoved-out-0:
           destination: "${KAFKA_TOPIC_LIKE_REMOVED:like-removed}"
-          content-type: "application/json"
+          content-type: "application/*+avro"
