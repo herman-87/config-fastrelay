@@ -30,6 +30,9 @@ spring:
           destination: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}"
           content-type: "application/*+avro"
       kafka:
+        binder:
+          consumer-properties:
+            specific.avro.reader: true
         bindings:
           userCreatedConsumer-in-0:
             consumer:

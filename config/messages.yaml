@@ -22,6 +22,9 @@ spring:
           destination: "${KAFKA_TOPIC_CONVERSATION_CREATED:conversation-created}"
           content-type: "application/*+avro"
       kafka:
+        binder:
+          consumer-properties:
+            specific.avro.reader: true
         bindings:
           orderRequestCreatedConsumer-in-0:
             consumer:

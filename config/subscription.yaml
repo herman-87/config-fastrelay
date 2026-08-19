@@ -24,6 +24,10 @@ spring:
         subscriptionExpired-out-0:
           destination: "${KAFKA_TOPIC_SUBSCRIPTION_EXPIRED:subscription-expired}"
           content-type: "application/*+avro"
+      kafka:
+        binder:
+          consumer-properties:
+            specific.avro.reader: true
 
 subscription:
   expiration:

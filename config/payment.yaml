@@ -29,6 +29,9 @@ spring:
           destination: "${KAFKA_TOPIC_TRANSFER_REQUEST_CREATED:transfer-request-created}"
           content-type: "application/*+avro"
       kafka:
+        binder:
+          consumer-properties:
+            specific.avro.reader: true
         bindings:
           userCreatedConsumer-in-0:
             consumer:

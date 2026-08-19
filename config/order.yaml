@@ -38,6 +38,9 @@ spring:
           destination: "${KAFKA_TOPIC_ORDER_DELIVERY_ACCEPTED:order-delivery-accepted}"
           content-type: "application/*+avro"
       kafka:
+        binder:
+          consumer-properties:
+            specific.avro.reader: true
         bindings:
           userCreatedConsumer-in-0:
             consumer:

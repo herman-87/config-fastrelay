@@ -63,6 +63,8 @@ spring:
           brokers: "${KAFKA_BOOTSTRAP_SERVERS:kafka:29092}"
           configuration:
             schema.registry.url: "${SCHEMA_REGISTRY_URL:http://schema-registry:8081}"
+          consumer-properties:
+            specific.avro.reader: true
         bindings:
           articleCreatedConsumer-in-0:
             consumer:
