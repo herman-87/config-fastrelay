@@ -65,6 +65,7 @@ spring:
             schema.registry.url: "${SCHEMA_REGISTRY_URL:http://schema-registry:8081}"
           consumer-properties:
             specific.avro.reader: true
+            value.deserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
         bindings:
           articleCreatedConsumer-in-0:
             consumer:
@@ -98,6 +99,9 @@ spring:
               dlq-name: "${KAFKA_TOPIC_LIKE_REMOVED:like-removed}.dlq"
           userCreatedConsumer-in-0:
             consumer:
+              useNativeDecoding: true
+              configuration:
+                value.deserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
               start-offset: earliest
               enable-dlq: true
               dlq-name: "${KAFKA_TOPIC_USER_CREATED:user-created}.dlq"

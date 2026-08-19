@@ -64,6 +64,7 @@ spring:
         binder:
           consumer-properties:
             specific.avro.reader: true
+            value.deserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
         bindings:
           orderRequestCreatedConsumer-in-0:
             consumer:
@@ -72,6 +73,9 @@ spring:
               dlq-name: "${KAFKA_TOPIC_ORDER_REQUEST_CREATED:order-request-created}.dlq"
           userCreatedConsumer-in-0:
             consumer:
+              useNativeDecoding: true
+              configuration:
+                value.deserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
               start-offset: earliest
               enable-dlq: true
               dlq-name: "${KAFKA_TOPIC_USER_CREATED:user-created}.dlq"
