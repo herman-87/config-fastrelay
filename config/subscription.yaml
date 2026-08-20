@@ -20,14 +20,19 @@ spring:
           content-type: "application/*+avro"
         subscriptionCreated-out-0:
           destination: "${KAFKA_TOPIC_SUBSCRIPTION_CREATED:subscription-created}"
-          content-type: "application/*+avro"
         subscriptionExpired-out-0:
           destination: "${KAFKA_TOPIC_SUBSCRIPTION_EXPIRED:subscription-expired}"
-          content-type: "application/*+avro"
       kafka:
         binder:
           consumer-properties:
             specific.avro.reader: true
+        bindings:
+          subscriptionCreated-out-0:
+            producer:
+              useNativeEncoding: true
+          subscriptionExpired-out-0:
+            producer:
+              useNativeEncoding: true
 
 subscription:
   expiration:

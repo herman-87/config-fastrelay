@@ -15,7 +15,6 @@ spring:
       bindings:
         userCreated-out-0:
           destination: "${KAFKA_TOPIC_USER_CREATED:user-created}"
-          content-type: "application/*+avro"
       kafka:
         binder:
           configuration:

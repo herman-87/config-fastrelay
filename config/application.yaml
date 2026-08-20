@@ -8,6 +8,7 @@ spring:
           auto-create-topics: true
           configuration:
             schema.registry.url: "${SCHEMA_REGISTRY_URL:http://schema-registry:8081}"
+            value.serializer: "io.confluent.kafka.serializers.KafkaAvroSerializer"
   jackson:
     default-property-inclusion: "NON_ABSENT"
   security:

@@ -28,13 +28,15 @@ spring:
           content-type: "application/*+avro"
         businessCreated-out-0:
           destination: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}"
-          content-type: "application/*+avro"
-      kafka:
-        binder:
-          consumer-properties:
-            specific.avro.reader: true
-            value.deserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
-        bindings:
+        kafka:
+          binder:
+            consumer-properties:
+              specific.avro.reader: true
+              value.deserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
+          bindings:
+            businessCreated-out-0:
+              producer:
+                useNativeEncoding: true
           userCreatedConsumer-in-0:
             consumer:
               useNativeDecoding: true
