@@ -17,34 +17,25 @@ spring:
         userCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_USER_CREATED:user-created}"
           group: "${KAFKA_GROUP_USER_CREATED:business-user-created}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         subscriptionCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_SUBSCRIPTION_CREATED:subscription-created}"
           group: "${KAFKA_GROUP_SUBSCRIPTION_CREATED:business-subscription-created}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         subscriptionExpiredConsumer-in-0:
           destination: "${KAFKA_TOPIC_SUBSCRIPTION_EXPIRED:subscription-expired}"
           group: "${KAFKA_GROUP_SUBSCRIPTION_EXPIRED:business-subscription-expired}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         businessCreated-out-0:
           destination: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}"
         kafka:
           binder:
-            consumer-properties:
-              specific.avro.reader: true
-              value.deserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
           bindings:
-            businessCreated-out-0:
-              producer:
-                useNativeEncoding: true
-          userCreatedConsumer-in-0:
-            consumer:
-              useNativeDecoding: true
-              configuration:
-                value.deserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
-              start-offset: earliest
-              enable-dlq: true
-              dlq-name: "${KAFKA_TOPIC_USER_CREATED:user-created}.dlq"
+            userCreatedConsumer-in-0:
+              consumer:
+                start-offset: earliest
+                enable-dlq: true
+                dlq-name: "${KAFKA_TOPIC_USER_CREATED:user-created}.dlq"
           subscriptionCreatedConsumer-in-0:
             consumer:
               start-offset: earliest

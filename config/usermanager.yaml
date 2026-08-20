@@ -17,16 +17,10 @@ spring:
           destination: "${KAFKA_TOPIC_USER_CREATED:user-created}"
       kafka:
         binder:
-          configuration:
-            schema.registry.url: "${SCHEMA_REGISTRY_URL:http://schema-registry:8081}"
-            value.serializer: "io.confluent.kafka.serializers.KafkaAvroSerializer"
         bindings:
           userCreated-out-0:
             producer:
-              useNativeEncoding: true
               sync: true
-              configuration:
-                value.serializer: "io.confluent.kafka.serializers.KafkaAvroSerializer"
 
 server:
   port: "${SERVER_PORT:8083}"

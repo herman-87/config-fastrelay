@@ -1,7 +1,0 @@
-{
-  "type": "record",
-  "name": "SubscriptionStatusEnum",
-  "namespace": "cm.fastrelays.events",
-  "type": "enum",
-  "symbols": ["ACTIVE", "SUSPENDED", "CANCELLED", "EXPIRED"]
-}

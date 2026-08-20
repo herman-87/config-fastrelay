@@ -27,28 +27,6 @@ spring:
       kafka:
         binder:
           brokers: "${KAFKA_BOOTSTRAP_SERVERS:kafka:29092}"
-          configuration:
-            schema.registry.url: "${SCHEMA_REGISTRY_URL:http://schema-registry:8081}"
-            value.serializer: "io.confluent.kafka.serializers.KafkaAvroSerializer"
-        bindings:
-          articleCreated-out-0:
-            producer:
-              useNativeEncoding: true
-          promotionCreated-out-0:
-            producer:
-              useNativeEncoding: true
-          productPublished-out-0:
-            producer:
-              useNativeEncoding: true
-          productUnpublished-out-0:
-            producer:
-              useNativeEncoding: true
-          promotionStarted-out-0:
-            producer:
-              useNativeEncoding: true
-          promotionClosed-out-0:
-            producer:
-              useNativeEncoding: true
 
 application:
   promotion:

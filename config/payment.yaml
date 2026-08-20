@@ -20,30 +20,21 @@ spring:
         userCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_USER_CREATED:user-created}"
           group: "${KAFKA_GROUP_ID:payment-service}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         businessCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}"
           group: "${KAFKA_GROUP_ID:payment-service}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         transferCreated-out-0:
           destination: "${KAFKA_TOPIC_TRANSFER_REQUEST_CREATED:transfer-request-created}"
         kafka:
           binder:
-            consumer-properties:
-              specific.avro.reader: true
-              value.deserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
           bindings:
-            transferCreated-out-0:
-              producer:
-                useNativeEncoding: true
-          userCreatedConsumer-in-0:
-            consumer:
-              useNativeDecoding: true
-              configuration:
-                value.deserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
-              start-offset: earliest
-              enable-dlq: true
-              dlq-name: "${KAFKA_TOPIC_USER_CREATED:user-created}.dlq"
+            userCreatedConsumer-in-0:
+              consumer:
+                start-offset: earliest
+                enable-dlq: true
+                dlq-name: "${KAFKA_TOPIC_USER_CREATED:user-created}.dlq"
           businessCreatedConsumer-in-0:
             consumer:
               start-offset: earliest

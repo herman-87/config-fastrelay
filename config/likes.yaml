@@ -18,13 +18,3 @@ spring:
           destination: "${KAFKA_TOPIC_LIKE_REMOVED:like-removed}"
       kafka:
         binder:
-          configuration:
-            schema.registry.url: "${SCHEMA_REGISTRY_URL:http://schema-registry:8081}"
-            value.serializer: "io.confluent.kafka.serializers.KafkaAvroSerializer"
-        bindings:
-          likeCreated-out-0:
-            producer:
-              useNativeEncoding: true
-          likeRemoved-out-0:
-            producer:
-              useNativeEncoding: true

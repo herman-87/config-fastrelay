@@ -17,17 +17,12 @@ spring:
         orderRequestCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_ORDER_REQUEST_CREATED:order-request-created}"
           group: "${KAFKA_GROUP_ID:messages-service}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         conversationCreated-out-0:
           destination: "${KAFKA_TOPIC_CONVERSATION_CREATED:conversation-created}"
       kafka:
         binder:
-          consumer-properties:
-            specific.avro.reader: true
         bindings:
-          conversationCreated-out-0:
-            producer:
-              useNativeEncoding: true
           orderRequestCreatedConsumer-in-0:
             consumer:
               start-offset: earliest

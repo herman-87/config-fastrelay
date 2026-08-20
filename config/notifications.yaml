@@ -11,60 +11,57 @@ spring:
         orderRequestCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_ORDER_REQUEST_CREATED:order-request-created}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         userCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_USER_CREATED:user-created}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         businessCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_BUSINESS_CREATED:business-created}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         articleCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_ARTICLE_CREATED:article-created}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         promotionCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_PROMOTION_CREATED:promotion-created}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         subscriptionCreatedConsumer-in-0:
           destination: "${KAFKA_TOPIC_SUBSCRIPTION_CREATED:subscription-created}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         productPublishedConsumer-in-0:
           destination: "${KAFKA_TOPIC_PRODUCT_PUBLISHED:product-published}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         promotionStartedConsumer-in-0:
           destination: "${KAFKA_TOPIC_PROMOTION_STARTED:promotion-started}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         promotionClosedConsumer-in-0:
           destination: "${KAFKA_TOPIC_PROMOTION_CLOSED:promotion-closed}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         orderPaidConsumer-in-0:
           destination: "${KAFKA_TOPIC_ORDER_PAID:order-paid}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         orderAcceptedConsumer-in-0:
           destination: "${KAFKA_TOPIC_ORDER_ACCEPTED:order-accepted}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         orderDeliveredConsumer-in-0:
           destination: "${KAFKA_TOPIC_ORDER_DELIVERED:order-delivered}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
         orderDeliveryAcceptedConsumer-in-0:
           destination: "${KAFKA_TOPIC_ORDER_DELIVERY_ACCEPTED:order-delivery-accepted}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
-          content-type: "application/*+avro"
+          content-type: "application/json"
       kafka:
         binder:
-          consumer-properties:
-            specific.avro.reader: true
-            value.deserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
         bindings:
           orderRequestCreatedConsumer-in-0:
             consumer:
@@ -73,9 +70,6 @@ spring:
               dlq-name: "${KAFKA_TOPIC_ORDER_REQUEST_CREATED:order-request-created}.dlq"
           userCreatedConsumer-in-0:
             consumer:
-              useNativeDecoding: true
-              configuration:
-                value.deserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
               start-offset: earliest
               enable-dlq: true
               dlq-name: "${KAFKA_TOPIC_USER_CREATED:user-created}.dlq"

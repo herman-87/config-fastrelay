@@ -1,9 +1,0 @@
-{
-  "type": "record",
-  "name": "PeriodEvent",
-  "namespace": "cm.fastrelays.events",
-  "fields": [
-    { "name": "startDate", "type": "string", "format": "date-time" },
-    { "name": "endDate", "type": ["null", "string"], "default": null, "format": "date-time" }
-  ]
-}
