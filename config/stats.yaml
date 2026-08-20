@@ -11,7 +11,7 @@ spring:
     url: "${DB_URL}"
   cloud:
     function:
-      definition: articleCreatedConsumer;promotionCreatedConsumer;businessCreatedConsumer;orderRequestCreatedConsumer;likeCreatedConsumer;likeRemovedConsumer;userCreatedConsumer;subscriptionCreatedConsumer;subscriptionExpiredConsumer;productPublishedConsumer;productUnpublishedConsumer
+      definition: articleCreatedConsumer;promotionCreatedConsumer;businessCreatedConsumer;orderRequestCreatedConsumer;likeCreatedConsumer;likeRemovedConsumer;userCreatedConsumer;subscriptionCreatedConsumer;subscriptionExpiredConsumer;productPublishedConsumer;productUnpublishedConsumer;businessStatsProducer;userDailyStatsProducer
     stream:
       bindings:
         articleCreatedConsumer-in-0:
@@ -57,6 +57,12 @@ spring:
         productUnpublishedConsumer-in-0:
           destination: "${KAFKA_TOPIC_PRODUCT_UNPUBLISHED:product-unpublished}"
           group: "${KAFKA_GROUP_ID:stats-service}"
+          content-type: "application/json"
+        businessStats-out-0:
+          destination: "${KAFKA_TOPIC_BUSINESS_STATS:business-stats}"
+          content-type: "application/json"
+        userDailyStats-out-0:
+          destination: "${KAFKA_TOPIC_USER_DAILY_STATS:user-daily-stats}"
           content-type: "application/json"
       kafka:
         binder:
