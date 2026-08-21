@@ -102,7 +102,7 @@ spring:
             - RewritePath=/subscription/(?<segment>.*), /${segment}
 
         - id: notification
-          uri: lb://notification
+          uri: lb://notifications
           predicates:
             - Path=/notification/**
           filters:
