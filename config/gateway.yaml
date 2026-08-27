@@ -115,6 +115,11 @@ spring:
           filters:
             - RewritePath=/messages/(?<segment>.*), /${segment}
 
+        - id: promo
+          uri: lb://promo-service
+          predicates:
+            - Path=/promo/**
+
 server:
   port: "${SERVER_PORT:8060}"
 

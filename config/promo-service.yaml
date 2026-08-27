@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: "${SPRING_APPLICATION_NAME:promo-service}"
+  datasource:
+    url: "${DB_URL}"
+
+server:
+  port: "${SERVER_PORT:8096}"
