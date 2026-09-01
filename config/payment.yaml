@@ -66,6 +66,14 @@ app:
       webhook-base-url: "${APP_WEBHOOK_BASE_URL_MONEYFUSION:https://fastrelays/moneyfusion}"
       account-number: "${APP_PROVIDER_MONEYFUSION_ACCOUNT_NUMBER:1000000004}"
       default-balance: "${APP_PROVIDER_MONEYFUSION_DEFAULT_BALANCE:0}"
+    fapshi:
+      base-url: "${PAYMENT_EXTERNAL_SERVICE_FAPSHI_URL:https://sandbox.fapshi.com}"
+      api-user: "${PAYMENT_FAPSHI_API_USER:}"
+      api-key: "${PAYMENT_FAPSHI_API_KEY:}"
+      webhook-secret: "${PAYMENT_FAPSHI_WEBHOOK_SECRET:}"
+      webhook-base-url: "${APP_WEBHOOK_BASE_URL_FAPSHI:https://fastrelays/fapshi}"
+      account-number: "${APP_PROVIDER_FAPSHI_ACCOUNT_NUMBER:1000000005}"
+      default-balance: "${APP_PROVIDER_FAPSHI_DEFAULT_BALANCE:0}"
   external:
     service:
       pawapay:
