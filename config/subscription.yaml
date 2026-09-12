@@ -28,3 +28,6 @@ spring:
 subscription:
   expiration:
     cron: "0 0 0 * * *"
+  pending-cancellation:
+    cron: "0 */5 * * * *"
+    max-age-minutes: "10"
