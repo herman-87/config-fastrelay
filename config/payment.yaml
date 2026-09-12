@@ -74,6 +74,7 @@ app:
       webhook-base-url: "${APP_WEBHOOK_BASE_URL_FAPSHI:https://fastrelays/fapshi}"
       account-number: "${APP_PROVIDER_FAPSHI_ACCOUNT_NUMBER:1000000005}"
       default-balance: "${APP_PROVIDER_FAPSHI_DEFAULT_BALANCE:0}"
+      payer-email: "${PAYMENT_FAPSHI_PAYER_EMAIL:hermanessoungou@gmail.com}"
   external:
     service:
       pawapay:
