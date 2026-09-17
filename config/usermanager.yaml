@@ -15,10 +15,15 @@ spring:
       bindings:
         userCreated-out-0:
           destination: "${KAFKA_TOPIC_USER_CREATED:user-created}"
+        passwordResetRequested-out-0:
+          destination: "${KAFKA_TOPIC_PASSWORD_RESET_REQUESTED:password-reset-requested}"
       kafka:
         binder:
         bindings:
           userCreated-out-0:
+            producer:
+              sync: true
+          passwordResetRequested-out-0:
             producer:
               sync: true
 

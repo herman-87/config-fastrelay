@@ -5,7 +5,7 @@ spring:
     url: "${DB_URL}"
   cloud:
     function:
-      definition: orderRequestCreatedConsumer;userCreatedConsumer;businessCreatedConsumer;articleCreatedConsumer;promotionCreatedConsumer;subscriptionCreatedConsumer;productPublishedConsumer;promotionStartedConsumer;promotionClosedConsumer;orderPaidConsumer;orderAcceptedConsumer;orderDeliveredConsumer;orderDeliveryAcceptedConsumer
+      definition: orderRequestCreatedConsumer;userCreatedConsumer;businessCreatedConsumer;articleCreatedConsumer;promotionCreatedConsumer;subscriptionCreatedConsumer;productPublishedConsumer;promotionStartedConsumer;promotionClosedConsumer;orderPaidConsumer;orderAcceptedConsumer;orderDeliveredConsumer;orderDeliveryAcceptedConsumer;passwordResetRequestedConsumer
     stream:
       bindings:
         orderRequestCreatedConsumer-in-0:
@@ -58,6 +58,10 @@ spring:
           content-type: "application/json"
         orderDeliveryAcceptedConsumer-in-0:
           destination: "${KAFKA_TOPIC_ORDER_DELIVERY_ACCEPTED:order-delivery-accepted}"
+          group: "${KAFKA_GROUP_ID:notifications-service}"
+          content-type: "application/json"
+        passwordResetRequestedConsumer-in-0:
+          destination: "${KAFKA_TOPIC_PASSWORD_RESET_REQUESTED:password-reset-requested}"
           group: "${KAFKA_GROUP_ID:notifications-service}"
           content-type: "application/json"
       kafka:
@@ -128,6 +132,11 @@ spring:
               start-offset: earliest
               enable-dlq: true
               dlq-name: "${KAFKA_TOPIC_ORDER_DELIVERY_ACCEPTED:order-delivery-accepted}.dlq"
+          passwordResetRequestedConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_PASSWORD_RESET_REQUESTED:password-reset-requested}.dlq"
 
 notifications:
   email:
