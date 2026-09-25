@@ -9,9 +9,24 @@ spring:
       port: "${REDIS_PORT:6379}"
   datasource:
     url: "${DB_URL}"
+  liquibase:
+    contexts: "${SPRING_LIQUIBASE_CONTEXTS:prod}"
+  elasticsearch:
+    uris: "${ELASTICSEARCH_URIS:http://elasticsearch:9200}"
+    connection-timeout: "${ELASTICSEARCH_CONNECTION_TIMEOUT:2s}"
+    socket-timeout: "${ELASTICSEARCH_SOCKET_TIMEOUT:5s}"
   cloud:
+    function:
+      definition: articleIndexConsumer
     stream:
       bindings:
+        articleIndexConsumer-in-0:
+          destination: "${KAFKA_TOPIC_ARTICLE_INDEX:article-index-requested}"
+          group: "${KAFKA_GROUP_ARTICLE_INDEX:product-search-indexer}"
+          content-type: application/json
+        articleIndex-out-0:
+          destination: "${KAFKA_TOPIC_ARTICLE_INDEX:article-index-requested}"
+          content-type: application/json
         articleCreated-out-0:
           destination: "${KAFKA_TOPIC_ARTICLE_CREATED:article-created}"
         promotionCreated-out-0:
@@ -27,8 +42,24 @@ spring:
       kafka:
         binder:
           brokers: "${KAFKA_BOOTSTRAP_SERVERS:kafka-broker-1:9092}"
+        bindings:
+          articleIndexConsumer-in-0:
+            consumer:
+              start-offset: earliest
+              enable-dlq: true
+              dlq-name: "${KAFKA_TOPIC_ARTICLE_INDEX:article-index-requested}.dlq"
+              max-attempts: 5
+          articleIndex-out-0:
+            producer:
+              sync: true
 
 application:
+  elasticsearch:
+    index: "${ELASTICSEARCH_ARTICLE_INDEX:articles-v1}"
+    alias: "${ELASTICSEARCH_ARTICLE_ALIAS:}"
+    read-index: "${ELASTICSEARCH_ARTICLE_READ_INDEX:${ELASTICSEARCH_ARTICLE_INDEX:articles-v1}}"
+    write-index: "${ELASTICSEARCH_ARTICLE_WRITE_INDEX:${ELASTICSEARCH_ARTICLE_INDEX:articles-v1}}"
+    reindex-on-startup: ${ELASTICSEARCH_REINDEX_ON_STARTUP:true}
   promotion:
     batch:
       cron: "0 */5 * * * *"

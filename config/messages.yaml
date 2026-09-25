@@ -20,6 +20,8 @@ spring:
           content-type: "application/json"
         conversationCreated-out-0:
           destination: "${KAFKA_TOPIC_CONVERSATION_CREATED:conversation-created}"
+        messageCreated-out-0:
+          destination: "${KAFKA_TOPIC_MESSAGE_CREATED:message-created}"
       kafka:
         binder:
         bindings:

@@ -32,6 +32,8 @@ spring:
         dialect: "org.hibernate.dialect.PostgreSQLDialect"
   liquibase:
     change-log: "classpath:db/changelog/master.xml"
+    # Production/default context; test profiles override this with test/e2e.
+    contexts: "${SPRING_LIQUIBASE_CONTEXTS:prod}"
     clear-check-sums: true
     enabled: true
 
